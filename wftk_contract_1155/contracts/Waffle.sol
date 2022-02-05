@@ -36,14 +36,14 @@ contract Waffle is Ownable {
     mapping(uint256 => address) public waffleToOwner;
     mapping(address => uint256) ownerWaffleCount;
 
+    function showTaken() public view returns (bool[36] memory) {
+        return taken;
+    }
+
     function markTaken(uint8 tokenId) internal {
         require(tokenId >= 0 && tokenId < 36, 'tokenId out of range');
         takenCount++;
         taken[tokenId] = true;
-    }
-
-    function showTaken() public view returns (bool[36] memory) {
-        return taken;
     }
 
     function _createNewRandomNotTaken(string memory name) internal returns (uint8) {
@@ -168,4 +168,71 @@ contract Waffle is Ownable {
             )
         );
     }
+
+    function getSvg(
+        Flavor flavor,
+        uint8[2] memory hor,
+        uint8[2] memory ver
+    ) internal pure returns (string memory) {
+        string memory svgStart = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350">';
+        string memory svgEnd = '</svg>';
+
+        string memory color;
+        if (flavor == Flavor.Chocolate) {
+            color = 'chocolate';
+        } else if (flavor == Flavor.Vanilla) {
+            color = 'lemonchiffon';
+        } else {
+            color = 'moccasin';
+        }
+
+        string memory background = string(
+            abi.encodePacked(
+                '<rect width="350" height="350"', ' x="', Strings.toString(0),'" y="' , Strings.toString(0),'" fill="', 'lightcyan' ,'" />'
+            )
+        );
+
+        string memory horShade = string(
+            abi.encodePacked(
+                '<rect width="350" height="5"', ' x="', Strings.toString(0),'" y="' , Strings.toString(uint16(hor[0] + 1) * 50),'" fill="', 'black' ,'" />',
+                '<rect width="350" height="5"', ' x="', Strings.toString(0),'" y="' , Strings.toString(uint16(hor[1] + 1) * 50),'" fill="', 'black' ,'" />'
+            )
+        );
+
+        string memory verShade = string(
+            abi.encodePacked(
+                '<rect width="5" height="350"', ' x="', Strings.toString(uint16(ver[0]) * 50 - 5),'" y="' , Strings.toString(0),'" fill="', 'black' ,'" />',
+                '<rect width="5" height="350"', ' x="', Strings.toString(uint16(ver[1]) * 50 - 5),'" y="' , Strings.toString(0),'" fill="', 'black' ,'" />'
+            )
+        );
+
+        string memory hors = string(
+            abi.encodePacked(
+                '<rect width="350" height="50"', ' x="', Strings.toString(0),'" y="' , Strings.toString(uint16(hor[0]) * 50),'" fill="', color ,'" />',
+                '<rect width="350" height="50"', ' x="', Strings.toString(0),'" y="' , Strings.toString(uint16(hor[1]) * 50),'" fill="', color ,'" />'
+            )
+        );
+
+        string memory vers = string(
+            abi.encodePacked(
+                '<rect width="50" height="350"', ' x="', Strings.toString(uint16(ver[0]) * 50),'" y="' , Strings.toString(0),'" fill="', color ,'" />',
+                '<rect width="50" height="350"', ' x="', Strings.toString(uint16(ver[1]) * 50),'" y="' , Strings.toString(0),'" fill="', color ,'" />'
+            )
+        );
+
+        string memory output = string(
+            abi.encodePacked(
+                background,
+                svgStart,
+                horShade,
+                verShade,
+                hors,
+                vers,
+                svgEnd
+            )
+        );
+
+        return output;
+    }
+
 }

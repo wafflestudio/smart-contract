@@ -9,6 +9,13 @@ import "./Waffle.sol";
 // @dev 와플 토큰 민팅을 위한 최종 구현체
 contract WaffleToken is ERC1155, Waffle {
 
+    function setURI(string memory uri_) public onlyOwner {
+        _setURI(uri_);
+        for(uint8 i = 0; i<36; i++) {
+            if(taken[i]) emit URI(uri_, i);
+        }
+    }
+
     constructor(string memory uri) ERC1155(uri) {
         // TODO D_APP 개발 후 URI 연동
         _setURI("");
@@ -31,8 +38,8 @@ contract WaffleToken is ERC1155, Waffle {
                             '{"name" : "', metadata.name,'",',
                             '"flavor" : "', _flavorToString(metadata.flavor),'",',
                             '"horizontals" : "', _intPairTobytes(metadata.horizontals), '",',
-                            '"verticals" : "', _intPairTobytes(metadata.verticals), '"}'
-
+                            '"verticals" : "', _intPairTobytes(metadata.verticals), '",',
+                            '"svg" : "', getSvg(metadata.flavor, metadata.horizontals, metadata.verticals), '"}'
                         )
                     )
                 )
