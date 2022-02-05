@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 
 // @dev 와플 NFT 코어 컨트랙트. 프로퍼티 정의 및 실행 로직 구성
 contract Waffle is Ownable {
@@ -10,7 +11,6 @@ contract Waffle is Ownable {
 
     bool[36] public taken;
     uint8 public takenCount;
-
     /**
         name: 와플 이름
         flavour: 와플 종류 (rendering 시 색상 등 결정)
@@ -151,5 +151,21 @@ contract Waffle is Ownable {
 
     function showVerticals(uint8 tokenId) public view returns(uint8[2] memory) {
         return idToWaffle[tokenId].verticals;
+    }
+
+    //convert utils
+    function _flavorToString(Flavor flavor) internal pure returns (string memory) {
+        if(flavor == Flavor.Vanilla) return "Vanilla";
+        if(flavor == Flavor.Chocolate) return "Chocolate";
+        if(flavor == Flavor.Plain) return "Plain";
+        return "UNKNOWN";
+    }
+
+    function _intPairTobytes(uint8[2] memory pair) internal pure returns (bytes memory) {
+        return bytes(
+            abi.encodePacked(
+                '[', Strings.toString(pair[0]), ',', Strings.toString(pair[1]), ']'
+            )
+        );
     }
 }
