@@ -1,22 +1,21 @@
 import { useCallback, useEffect, useState } from 'react';
-import { ethers } from 'ethers';
 import { PageTitle } from '../../molecule/page-title/page-title';
+import { provider } from '../../../library/ethers';
+import toast from 'react-hot-toast';
 
 export const Home = () => {
-  const [provider, setProvider] =
-    useState<ethers.providers.Web3Provider | null>();
-  const [signer, setSigner] = useState<ethers.providers.JsonRpcSigner | null>();
+  const [error, setError] = useState<boolean>(false);
   const [address, setAddress] = useState<string | null>();
 
   const init = useCallback(async () => {
-    // @ts-ignore
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    setProvider(provider);
-    await provider.send('eth_requestAccounts', []);
-    const signer = provider.getSigner();
-    setSigner(signer);
-    const address = await signer.getAddress();
-    setAddress(address);
+    if (!provider) {
+      setError(true);
+      toast.error('Metamask 에 연결되어 있는지 확인해 주세요.');
+      return;
+    }
+
+    const res = await provider.send('eth_requestAccounts', []);
+    setAddress(res[0]);
   }, []);
 
   useEffect(() => {
