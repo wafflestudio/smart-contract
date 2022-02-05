@@ -2,8 +2,6 @@ import { useQuery } from 'react-query';
 import { contract } from '../../../library/ethers';
 
 export interface Token {
-  0: string;
-  1: number;
   flavor: number;
   name: string;
 }

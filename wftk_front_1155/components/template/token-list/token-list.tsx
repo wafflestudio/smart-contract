@@ -5,5 +5,14 @@ export const TokenList = () => {
 
   console.log(tokenList);
 
-  return null;
+  return (
+    <ul>
+      {tokenList?.map((item, i) => (
+        <li key={i}>
+          {item.name} <br />
+          {item.flavor}
+        </li>
+      ))}
+    </ul>
+  );
 };
