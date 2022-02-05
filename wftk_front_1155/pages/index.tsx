@@ -1,8 +1,13 @@
 import type { NextPage } from 'next';
-import Layout from '../components/commmon/layout/layout';
+import { Layout } from '../components/commmon/layout/layout';
+import { Home } from '../components/page/';
 
-const Home: NextPage = () => {
-  return <Layout>home</Layout>;
+const HomePage: NextPage = () => {
+  return (
+    <Layout>
+      <Home />
+    </Layout>
+  );
 };
 
-export default Home;
+export default HomePage;

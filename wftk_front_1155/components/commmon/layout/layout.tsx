@@ -4,7 +4,7 @@ import Head from 'next/head';
 
 interface Props {}
 
-const Layout = ({ children }: PropsWithChildren<Props>): JSX.Element => {
+export const Layout = ({ children }: PropsWithChildren<Props>): JSX.Element => {
   return (
     <div className={styles.container}>
       <Head>
@@ -19,5 +19,3 @@ const Layout = ({ children }: PropsWithChildren<Props>): JSX.Element => {
     </div>
   );
 };
-
-export default Layout;
