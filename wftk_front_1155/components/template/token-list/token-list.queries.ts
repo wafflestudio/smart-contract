@@ -1,9 +1,16 @@
 import { useQuery } from 'react-query';
 import { contract } from '../../../library/ethers';
 
+export enum Flavor {
+  VANILLA,
+  PLAIN,
+  CHOCOLATE,
+}
+
 export interface Token {
-  flavor: number;
+  flavor: Flavor;
   name: string;
+  id: number;
 }
 
 export const useTokenList = () =>
@@ -19,6 +26,13 @@ export const useTokenList = () =>
       ),
     {
       enabled: !!contract && 'idToWaffle' in contract,
-      select: (data) => data.filter((i) => i.name),
+      select: (data) =>
+        data
+          .map((token, index) => ({
+            name: token.name,
+            flavor: token.flavor as Flavor,
+            id: index,
+          }))
+          .filter((token) => token.name),
     }
   );

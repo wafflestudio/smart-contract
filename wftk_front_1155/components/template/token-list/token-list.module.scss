@@ -1,0 +1,26 @@
+.list {
+  border-radius: 16px;
+  width: 100%;
+  background-color: rgba(238, 154, 98, 0.3);
+  padding: 1rem;
+  list-style-type: none;
+  gap: 20px;
+
+  .item {
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+    border-radius: 16px;
+    background-color: rgba(238, 154, 98, 0.5);
+    text-align: center;
+    line-height: 100px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: rgba(238, 154, 98, 0.6);
+      box-shadow: 0 2px 4px rgb(238, 154, 98);
+    }
+  }
+}
