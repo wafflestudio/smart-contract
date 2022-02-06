@@ -544,6 +544,24 @@ export const WAFFLE_TOKEN_ABI = [
   {
     inputs: [
       {
+        internalType: 'string',
+        name: 'name',
+        type: 'string',
+      },
+      {
+        internalType: 'bytes',
+        name: 'data',
+        type: 'bytes',
+      },
+    ],
+    name: 'claimRandomWaffle',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
         internalType: 'uint256',
         name: '',
         type: 'uint256',
