@@ -9,6 +9,21 @@ import "./Waffle.sol";
 // @dev 와플 토큰 민팅을 위한 최종 구현체
 contract WaffleToken is ERC1155, Waffle {
 
+    function safeTransferFrom(
+        address from,
+        address to,
+        uint256 id,
+        uint256 amount,
+        bytes memory data
+    ) public override {
+        require(
+            from == _msgSender() || isApprovedForAll(from, _msgSender()),
+                "ERC1155: caller is not owner nor approved"
+        );
+        _safeTransferFrom(from, to, id, amount, data);
+        waffleToOwner[id] = to;
+    }
+
     function setURI(string memory uri_) public onlyOwner {
         _setURI(uri_);
         for(uint8 i = 0; i<36; i++) {
