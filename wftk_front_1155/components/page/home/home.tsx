@@ -5,11 +5,20 @@ import { TokenList } from '../../organization/token-list/token-list';
 import styles from './home.module.scss';
 
 export const Home = () => {
-  const { data: address } = useAddress();
+  const { data: address, isLoading } = useAddress();
 
   return (
     <div>
-      <PageTitle title={'My Token List'} content={`logged in as ${address}`} />
+      <PageTitle
+        title={'My Token List'}
+        content={
+          isLoading
+            ? ''
+            : address
+            ? `logged in as ${address}`
+            : 'Please check if metamask is connected.'
+        }
+      />
       <TokenList className={styles.tokenListWrapper} />
     </div>
   );

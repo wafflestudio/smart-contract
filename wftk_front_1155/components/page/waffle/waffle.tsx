@@ -11,9 +11,9 @@ export const Waffle = () => {
   const id =
     typeof router.query.id === 'string' ? Number(router.query.id) : null;
 
-  const { data: waffle, isLoading } = useWaffle(id);
+  const { data: waffle } = useWaffle(id);
 
-  if (!waffle || isLoading)
+  if (!waffle)
     return (
       <MutatingDots
         width={100}

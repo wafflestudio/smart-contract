@@ -13,11 +13,11 @@ interface Props {
 }
 
 export const TokenList = ({ className }: Props) => {
-  const { data: tokenList, isLoading } = useTokenList();
+  const { data: tokenList } = useTokenList();
 
   return (
     <ul className={classNames(className, styles.list)}>
-      {tokenList && !isLoading ? (
+      {tokenList ? (
         tokenList.map((item, i) => (
           <Link key={i} href={`/waffle/${item.id}`} passHref>
             <li
