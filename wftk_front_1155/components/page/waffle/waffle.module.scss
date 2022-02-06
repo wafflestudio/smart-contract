@@ -12,3 +12,11 @@
     background-color: black;
   }
 }
+
+.loader {
+  position: fixed;
+  width: 100px;
+  height: 100px;
+  left: calc(50vw - 50px);
+  top: calc(50vh - 20px);
+}

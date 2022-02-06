@@ -1957,6 +1957,11 @@ react-is@^16.13.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
+react-loader-spinner@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/react-loader-spinner/-/react-loader-spinner-5.1.1.tgz#6957da72383fba8dba78d8d138cf266a86257a17"
+  integrity sha512-dvEDHdbk2OJ28lVmq5XubC/1yyWLcR4XwTltdVt6irIaa+aXhnY7blnfzMHfTQs3joZHZgcbSwQnhP2xJ75TTQ==
+
 react-query@^3.34.13:
   version "3.34.13"
   resolved "https://registry.yarnpkg.com/react-query/-/react-query-3.34.13.tgz#6804767e2e00c780f29fc5cbf923e48bb5cb7f83"
