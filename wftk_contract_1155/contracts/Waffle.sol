@@ -23,7 +23,6 @@ contract Waffle is Ownable {
         - lsb => 색상 16개 (x0 ~xF)
         - (uint8) horizontals[0] = x01 ~ xF5
         서로 겹치거나 인접할 수 없음
-        @dev TODO 프로퍼티 확장 및 애플리케이션 형태를 고려한 도메인 설계
     */
     struct MetaData {
         string name;
@@ -161,7 +160,7 @@ contract Waffle is Ownable {
         return "UNKNOWN";
     }
 
-    function _intPairTobytes(uint8[2] memory pair) internal pure returns (bytes memory) {
+    function _intPairToBytes(uint8[2] memory pair) internal pure returns (bytes memory) {
         return bytes(
             abi.encodePacked(
                 '[', Strings.toString(pair[0]), ',', Strings.toString(pair[1]), ']'
@@ -222,8 +221,8 @@ contract Waffle is Ownable {
 
         string memory output = string(
             abi.encodePacked(
-                background,
                 svgStart,
+                background,
                 horShade,
                 verShade,
                 hors,

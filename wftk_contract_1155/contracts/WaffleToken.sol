@@ -17,7 +17,6 @@ contract WaffleToken is ERC1155, Waffle {
     }
 
     constructor(string memory uri) ERC1155(uri) {
-        // TODO D_APP 개발 후 URI 연동
         _setURI("");
 
         for (uint8 i = 0; i < 5; i++) {
@@ -26,21 +25,18 @@ contract WaffleToken is ERC1155, Waffle {
         }
     }
 
-    function metadataURI(uint8 tokenId) public view returns (string memory) {
+    function tokenData(uint8 tokenId) public view returns (string memory) {
         MetaData memory metadata = idToWaffle[tokenId];
 
         return string(
             abi.encodePacked(
-                "data:application/json;base64,",
-                Base64.encode(
-                    bytes(
-                        abi.encodePacked(
-                            '{"name" : "', metadata.name,'",',
-                            '"flavor" : "', _flavorToString(metadata.flavor),'",',
-                            '"horizontals" : "', _intPairTobytes(metadata.horizontals), '",',
-                            '"verticals" : "', _intPairTobytes(metadata.verticals), '",',
-                            '"svg" : "', getSvg(metadata.flavor, metadata.horizontals, metadata.verticals), '"}'
-                        )
+                string(
+                    abi.encodePacked(
+                        '{"name" : "', metadata.name,'",',
+                        '"flavor" : "', _flavorToString(metadata.flavor),'",',
+                        '"horizontals" : "', _intPairToBytes(metadata.horizontals), '",',
+                        '"verticals" : "', _intPairToBytes(metadata.verticals), '",',
+                        '"svg" : "',"data:application/json;base64,", Base64.encode(bytes(getSvg(metadata.flavor, metadata.horizontals, metadata.verticals))), '"}'
                     )
                 )
             )
@@ -52,11 +48,9 @@ contract WaffleToken is ERC1155, Waffle {
         string memory name,
         bytes memory data
     ) external payable {
-//        require(msg.value >= 0.001 ether, "you need 0.0001 ETH to purchase waffle");
-
+        require(msg.value >= 0.001 ether, "you need 0.0001 ETH to purchase waffle");
         _mintRandomWaffle(name, data);
-
-//        payable(owner()).transfer(0.001 ether);
+        payable(owner()).transfer(0.001 ether);
     }
 
     function _mintRandomWaffle(
