@@ -68,15 +68,12 @@ export const useTokenList = (address?: string) =>
     {
       enabled: !!contract && 'idToWaffle' in contract,
       select: useCallback(
-        (tokenList: Token[]) => {
-          console.log(address);
-          console.log(tokenList);
-          return address
+        (tokenList: Token[]) =>
+          address
             ? tokenList.filter(
                 (token) => token.owner.toLowerCase() === address.toLowerCase()
               )
-            : tokenList;
-        },
+            : tokenList,
         [address]
       ),
     }
