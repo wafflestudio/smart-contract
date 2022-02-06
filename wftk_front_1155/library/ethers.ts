@@ -1,7 +1,7 @@
 import { ethers } from 'ethers';
 
 export const WAFFLE_TOKEN_ADDRESS =
-  '0xe6b755f51E1d1e2d6b7BA87357d96F11bC17C618';
+  '0x19C08EbbC9Cf5DCe3d74e6AF8f94f99fEa81a30A';
 export const WAFFLE_TOKEN_ABI = [
   {
     inputs: [],
