@@ -43,6 +43,7 @@ export const Home = () => {
             : 'Please check if metamask is connected.'
         }
       />
+      <br />
       <Typography as={'h2'}>
         내 토큰
         <button

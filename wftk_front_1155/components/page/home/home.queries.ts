@@ -17,9 +17,12 @@ export const useAddress = () =>
     'address',
     async () => {
       if (!provider) throw Error;
-      const addressList = await provider.send('eth_requestAccounts', []);
+      const addressList: string[] = await provider.send(
+        'eth_requestAccounts',
+        []
+      );
       if (addressList.length !== 1) throw Error;
-      return addressList;
+      return addressList[0];
     },
     {
       onError: () => {
@@ -33,7 +36,7 @@ export const useAddress = () =>
 
 export const useTokenList = (address?: string) =>
   useQuery<Token[]>(
-    'token-list',
+    ['token-list', address],
     async () => {
       const result = await Promise.all(
         // TODO 100 말고 올바른 number
@@ -65,10 +68,15 @@ export const useTokenList = (address?: string) =>
     {
       enabled: !!contract && 'idToWaffle' in contract,
       select: useCallback(
-        (tokenList: Token[]) =>
-          address
-            ? tokenList.filter((token) => token.owner === address)
-            : tokenList,
+        (tokenList: Token[]) => {
+          console.log(address);
+          console.log(tokenList);
+          return address
+            ? tokenList.filter(
+                (token) => token.owner.toLowerCase() === address.toLowerCase()
+              )
+            : tokenList;
+        },
         [address]
       ),
     }
