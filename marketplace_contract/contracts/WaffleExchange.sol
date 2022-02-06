@@ -12,11 +12,11 @@ contract WaffleExchange is WaffleExchangeProxyHandler {
      */
     uint8 private exchangeFee;
 
-    constructor(
+    function __Exchange_init(
         INftTransferProxy nftTransferProxy,
         IERC20TransferProxy erc20TransferProxy,
         uint8 _exchangeFee 
-    ) {
+    ) external initializer {
         initTransferProxy(nftTransferProxy, erc20TransferProxy);
         exchangeFee = _exchangeFee;
     }
