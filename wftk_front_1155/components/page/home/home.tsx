@@ -1,6 +1,6 @@
 import { PageTitle } from '../../molecule/page-title/page-title';
 import { useAddress } from './home.queries';
-import { TokenList } from '../../template/token-list/token-list';
+import { TokenList } from '../../organization/token-list/token-list';
 
 import styles from './home.module.scss';
 
