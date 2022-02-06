@@ -1,6 +1,7 @@
 import { useQuery } from 'react-query';
 import { contract } from '../../../library/ethers';
-import { Token } from '../../organization/token-list/token-list.queries';
+import toast from 'react-hot-toast';
+import { Token } from '../home/home.queries';
 
 interface Waffle {
   token: Token;
@@ -39,6 +40,9 @@ export const useWaffle = (id: number | null) => {
         hor: [hor[0], hor[1] - hor[0], 8 - hor[1]],
         ver: [ver[0], ver[1] - ver[0], 8 - ver[1]],
       }),
+      onError: () => {
+        toast.error('An error occurred.');
+      },
     }
   );
 };

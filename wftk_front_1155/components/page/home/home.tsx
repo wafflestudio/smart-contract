@@ -1,11 +1,15 @@
 import { PageTitle } from '../../molecule/page-title/page-title';
-import { useAddress } from './home.queries';
+import { useAddress, useAddressTokenList, useTokenList } from './home.queries';
 import { TokenList } from '../../organization/token-list/token-list';
 
 import styles from './home.module.scss';
+import { Typography } from '../../atom/typography/typography';
 
 export const Home = () => {
   const { data: address, isLoading } = useAddress();
+
+  const { data: tokenList } = useTokenList();
+  const { data: myTokenList } = useAddressTokenList(address);
 
   return (
     <div>
@@ -19,7 +23,10 @@ export const Home = () => {
             : 'Please check if metamask is connected.'
         }
       />
-      <TokenList className={styles.tokenListWrapper} />
+      <Typography as={'h2'}>내 토큰</Typography>
+      <TokenList className={styles.tokenListWrapper} tokenList={myTokenList} />
+      <Typography as={'h2'}>모든 토큰</Typography>
+      <TokenList className={styles.tokenListWrapper} tokenList={tokenList} />
     </div>
   );
 };

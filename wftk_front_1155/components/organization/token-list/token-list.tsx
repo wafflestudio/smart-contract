@@ -1,4 +1,3 @@
-import { useTokenList } from './token-list.queries';
 import { Typography } from '../../atom/typography/typography';
 import Link from 'next/link';
 
@@ -7,14 +6,14 @@ import classNames from 'classnames';
 import { FLAVOR_COLOR_MAP, FLAVOR_LABEL_MAP } from '../../../library/flavor';
 import { MutatingDots } from 'react-loader-spinner';
 import { $waffle_brown, $waffle_pink } from '../../../styles/palette';
+import { Token } from '../../page/home/home.queries';
 
 interface Props {
   className?: string;
+  tokenList?: Token[];
 }
 
-export const TokenList = ({ className }: Props) => {
-  const { data: tokenList } = useTokenList();
-
+export const TokenList = ({ className, tokenList }: Props) => {
   return (
     <ul className={classNames(className, styles.list)}>
       {tokenList ? (

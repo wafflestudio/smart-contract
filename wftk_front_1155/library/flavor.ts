@@ -1,5 +1,10 @@
-import { Flavor } from '../components/organization/token-list/token-list.queries';
 import { $chocolate, $plain, $vanilla } from '../styles/palette';
+
+export enum Flavor {
+  PLAIN,
+  CHOCOLATE,
+  VANILLA,
+}
 
 export const FLAVOR_COLOR_MAP = {
   [Flavor.VANILLA]: $vanilla,
