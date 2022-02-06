@@ -6,3 +6,9 @@ export const FLAVOR_COLOR_MAP = {
   [Flavor.PLAIN]: $plain,
   [Flavor.CHOCOLATE]: $chocolate,
 };
+
+export const FLAVOR_LABEL_MAP = {
+  [Flavor.VANILLA]: 'vanilla',
+  [Flavor.PLAIN]: 'plain',
+  [Flavor.CHOCOLATE]: 'chocolate',
+};

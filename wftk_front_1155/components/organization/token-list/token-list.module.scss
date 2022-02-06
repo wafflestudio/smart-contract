@@ -1,9 +1,7 @@
 @import '../../../styles/palette';
 
 .list {
-  border-radius: 16px;
   width: 100%;
-  background-color: rgba($waffle_brown, 0.2);
   padding: 1rem;
   list-style-type: none;
   gap: 20px;
@@ -13,16 +11,15 @@
     height: 200px;
     display: inline-block;
     border-radius: 16px;
-    background-color: rgba($waffle_brown, 0.3);
     text-align: center;
-    line-height: 100px;
     margin: 10px;
     cursor: pointer;
     transition: all 0.2s;
+    padding: 40px 0;
 
     &:hover {
-      background-color: rgba($waffle_brown, 0.5);
-      box-shadow: 0 2px 4px $waffle_brown;
+      box-shadow: 0 2px 4px $waffle_black;
+      transform: scale(1.02);
     }
   }
 }
