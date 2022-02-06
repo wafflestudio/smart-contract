@@ -1,6 +1,5 @@
 import styles from './waffle-display.module.scss';
-import { FLAVOR_COLOR_MAP } from '../../../library/flavor';
-import { Flavor } from '../token-list/token-list.queries';
+import { Flavor, FLAVOR_COLOR_MAP } from '../../../library/flavor';
 import classNames from 'classnames';
 
 interface Props {

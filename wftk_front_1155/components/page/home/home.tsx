@@ -34,7 +34,7 @@ export const Home = () => {
   return (
     <div>
       <PageTitle
-        title={'My Token List'}
+        title={'Token List'}
         content={
           typeof window === 'undefined' || isLoading
             ? ''
