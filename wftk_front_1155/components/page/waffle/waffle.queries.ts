@@ -8,6 +8,7 @@ interface Waffle {
   svg: string;
   hor: [number, number, number];
   ver: [number, number, number];
+  owner: string;
 }
 
 export const useWaffle = (id: number | null) => {
@@ -28,17 +29,19 @@ export const useWaffle = (id: number | null) => {
       const tokenId = id * 3;
       const token: Token = await contract!.idToWaffle(tokenId);
       const metadata: string = await contract!.metadataURI(tokenId);
+      const owner = await contract!.waffleToOwner(tokenId);
       const hor: [number, number] = await contract!.showHorizontals(tokenId);
       const ver: [number, number] = await contract!.showVerticals(tokenId);
-      return { token, hor, ver, metadata };
+      return { token, hor, ver, metadata, owner };
     },
     {
       enabled,
-      select: ({ token, hor, ver, metadata }): Waffle => ({
+      select: ({ token, hor, ver, metadata, owner }): Waffle => ({
         token,
         svg: atob(metadata.substring(29)).split('"svg" : "')[1].slice(0, -2),
         hor: [hor[0], hor[1] - hor[0], 8 - hor[1]],
         ver: [ver[0], ver[1] - ver[0], 8 - ver[1]],
+        owner,
       }),
       onError: () => {
         toast.error('An error occurred.');

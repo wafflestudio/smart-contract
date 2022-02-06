@@ -25,11 +25,11 @@ export const Waffle = () => {
       />
     );
 
-  const { hor, ver, token, svg } = waffle;
+  const { hor, ver, token, svg, owner } = waffle;
 
   return (
     <div className={styles.wrapper}>
-      <PageTitle title={token.name} content={'token detail'} />
+      <PageTitle title={token.name} content={`owner address: ${owner}`} />
       <table className={styles.waffleTable}>
         <thead>
           <tr>
