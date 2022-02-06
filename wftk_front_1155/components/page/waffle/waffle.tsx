@@ -1,9 +1,10 @@
 import { useWaffle } from './waffle.queries';
 import { useRouter } from 'next/router';
 import styles from './waffle.module.scss';
-import { FLAVOR_COLOR_MAP } from '../../../library/flavor';
 import { MutatingDots } from 'react-loader-spinner';
 import { $waffle_brown, $waffle_pink } from '../../../styles/palette';
+import { WaffleDisplay } from '../../organization/waffle-display/waffle-display';
+import { PageTitle } from '../../molecule/page-title/page-title';
 
 export const Waffle = () => {
   const router = useRouter();
@@ -24,27 +25,34 @@ export const Waffle = () => {
       />
     );
 
-  const { hor, ver, flavor } = waffle;
+  const { hor, ver, token, svg } = waffle;
 
   return (
-    <div
-      className={styles.waffle}
-      style={{
-        gridTemplateRows: ver.join('fr ') + 'fr',
-        gridTemplateColumns: hor.join('fr ') + 'fr',
-      }}
-    >
-      {Array(9)
-        .fill(0)
-        .map((_, i) => (
-          <div
-            key={i}
-            className={styles.waffleBlock}
-            style={{
-              backgroundColor: FLAVOR_COLOR_MAP[flavor],
-            }}
-          />
-        ))}
+    <div className={styles.wrapper}>
+      <PageTitle title={token.name} content={'token detail'} />
+      <table className={styles.waffleTable}>
+        <thead>
+          <tr>
+            <th>ERC-721</th>
+            <th>ERC-1155</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <WaffleDisplay
+                hor={hor}
+                ver={ver}
+                flavor={token.flavor}
+                className={styles.waffleWrapper}
+              />
+            </td>
+            <td>
+              <div dangerouslySetInnerHTML={{ __html: svg }} />
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 };

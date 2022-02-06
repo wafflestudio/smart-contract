@@ -403,6 +403,26 @@ export const WAFFLE_TOKEN_ABI = [
   {
     inputs: [
       {
+        internalType: 'uint8',
+        name: 'tokenId',
+        type: 'uint8',
+      },
+    ],
+    name: 'metadataURI',
+    outputs: [
+      {
+        internalType: 'string',
+        name: '',
+        type: 'string',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+    constant: true,
+  },
+  {
+    inputs: [
+      {
         internalType: 'bytes4',
         name: 'interfaceId',
         type: 'bytes4',

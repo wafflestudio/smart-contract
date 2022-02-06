@@ -2,7 +2,7 @@ import { Typography } from '../../atom/typography/typography';
 
 interface Props {
   title: string;
-  content: string;
+  content?: string;
 }
 
 export const PageTitle = ({ title, content }: Props) => {
@@ -11,7 +11,7 @@ export const PageTitle = ({ title, content }: Props) => {
       <Typography as={'h1'} variant={'title'}>
         {title}
       </Typography>
-      <Typography>{content}</Typography>
+      {content && <Typography>{content}</Typography>}
     </>
   );
 };
