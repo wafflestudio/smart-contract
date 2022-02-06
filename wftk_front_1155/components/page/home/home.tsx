@@ -8,6 +8,7 @@ import { contract, provider } from '../../../library/ethers';
 import { useState } from 'react';
 import Modal from 'react-modal';
 import toast from 'react-hot-toast';
+import { Add } from '@mui/icons-material';
 
 export const Home = () => {
   const [isCreateModalOpen, setCreateModalOpen] = useState<boolean>(false);
@@ -44,13 +45,13 @@ export const Home = () => {
         }
       />
       <br />
-      <Typography as={'h2'}>
+      <Typography as={'h2'} className={styles.myTokenTitle}>
         내 토큰
         <button
-          style={{ height: 20, marginLeft: 8 }}
+          className={styles.mintButton}
           onClick={() => setCreateModalOpen(true)}
         >
-          +
+          <Add />
         </button>
       </Typography>
       <TokenList className={styles.tokenListWrapper} tokenList={myTokenList} />
