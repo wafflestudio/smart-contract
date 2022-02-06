@@ -12,7 +12,7 @@ export const Home = () => {
       <PageTitle
         title={'My Token List'}
         content={
-          isLoading
+          typeof window === 'undefined' || isLoading
             ? ''
             : address
             ? `logged in as ${address}`
