@@ -10,3 +10,14 @@
   background-color: $waffle_brown;
   font-weight: bold;
 }
+
+.container {
+  padding: 0;
+  min-width: 320px;
+}
+
+.main {
+  min-height: calc(100vh - 60px);
+  height: calc(100vh - 60px);
+  padding: 1rem;
+}

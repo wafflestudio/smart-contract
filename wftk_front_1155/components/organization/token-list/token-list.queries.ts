@@ -2,9 +2,9 @@ import { useQuery } from 'react-query';
 import { contract } from '../../../library/ethers';
 
 export enum Flavor {
-  VANILLA,
   PLAIN,
   CHOCOLATE,
+  VANILLA,
 }
 
 export interface Token {

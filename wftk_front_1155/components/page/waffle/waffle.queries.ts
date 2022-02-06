@@ -1,11 +1,14 @@
 import { useQuery } from 'react-query';
 import { contract } from '../../../library/ethers';
-import { Token } from '../../organization/token-list/token-list.queries';
+import {
+  Flavor,
+  Token,
+} from '../../organization/token-list/token-list.queries';
 
 interface Waffle {
-  token: Token;
-  hor: [number, number];
-  ver: [number, number];
+  flavor: Flavor;
+  hor: [number, number, number];
+  ver: [number, number, number];
 }
 
 export const useWaffle = (id: number | null) => {
@@ -16,7 +19,7 @@ export const useWaffle = (id: number | null) => {
     'showHorizontals' in contract &&
     'showVerticals' in contract;
 
-  return useQuery<Waffle>(
+  return useQuery(
     ['waffle', id],
     async () => {
       if (!enabled) {
@@ -24,13 +27,18 @@ export const useWaffle = (id: number | null) => {
       }
 
       const tokenId = id * 3;
-      const token = await contract!.idToWaffle(tokenId);
-      const hor = await contract!.showHorizontals(tokenId);
-      const ver = await contract!.showVerticals(tokenId);
+      const token: Token = await contract!.idToWaffle(tokenId);
+      const hor: [number, number] = await contract!.showHorizontals(tokenId);
+      const ver: [number, number] = await contract!.showVerticals(tokenId);
       return { token, hor, ver };
     },
     {
       enabled,
+      select: ({ token, hor, ver }): Waffle => ({
+        flavor: token.flavor,
+        hor: [hor[0], hor[1] - hor[0], 8 - hor[1]],
+        ver: [ver[0], ver[1] - ver[0], 8 - ver[1]],
+      }),
     }
   );
 };
