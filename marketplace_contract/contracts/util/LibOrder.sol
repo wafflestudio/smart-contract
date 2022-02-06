@@ -10,6 +10,8 @@ library LibOrder {
         LibAsset.Asset makeAsset;
         address taker;
         LibAsset.Asset takeAsset;
-        uint128 orderHash;
+        uint256 salt;
+        bytes4 dataTypes;
+        bytes data;
     }
 }
