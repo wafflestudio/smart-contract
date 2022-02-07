@@ -11,7 +11,5 @@ library LibOrder {
         address taker;
         LibAsset.Asset takeAsset;
         uint256 salt;
-        bytes4 dataTypes;
-        bytes data;
     }
 }
