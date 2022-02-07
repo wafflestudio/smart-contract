@@ -1,10 +1,26 @@
+@import 'styles/palette';
+
+.header {
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  font-size: 28px;
+  color: $waffle_black;
+  box-shadow: 0 2px 4px $waffle_pink;
+  background-color: $waffle_brown;
+  font-weight: bold;
+}
+
 .container {
-  .header {
-  }
+  padding: 0;
+  min-width: 320px;
+}
 
-  .main {
-  }
+.main {
+  min-height: calc(100vh - 60px);
+  height: calc(100vh - 60px);
+  padding: 2rem 4rem;
+}
 
-  .footer {
-  }
+.footer {
 }

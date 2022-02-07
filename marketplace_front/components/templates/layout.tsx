@@ -4,9 +4,11 @@ import Head from 'next/head';
 
 import styles from './layout.module.scss';
 
-interface Props {}
+interface Props {
+  title?: string;
+}
 
-export const Layout = ({ children }: PropsWithChildren<Props>) => {
+export const Layout = ({ children, title = 'Waffle Token Marketplace' }: PropsWithChildren<Props>) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -15,7 +17,7 @@ export const Layout = ({ children }: PropsWithChildren<Props>) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header className={styles.header} />
+      <header className={styles.header}>{title}</header>
 
       <main className={styles.main}>{children}</main>
 
