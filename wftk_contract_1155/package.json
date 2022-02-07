@@ -1,0 +1,33 @@
+{
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.4.2",
+    "@truffle/hdwallet-provider": "^2.0.1",
+    "ganache-cli": "^6.1.8",
+    "openzeppelin-solidity": "^4.4.2",
+    "web3": "^1.7.0"
+  },
+  "name": "NFT",
+  "description": "와플스튜디오 NFT 프로젝트",
+  "version": "1.0.0",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wafflestudio/NFT.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wafflestudio/NFT/issues"
+  },
+  "homepage": "https://github.com/wafflestudio/NFT#readme",
+  "devDependencies": {
+    "truffle-plugin-verify": "^0.5.21"
+  }
+}

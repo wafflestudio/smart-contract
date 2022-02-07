@@ -1,3 +1,6 @@
 # 뭐 하지
 .idea
 .DS_Store
+.secret
+node_modules
+build
