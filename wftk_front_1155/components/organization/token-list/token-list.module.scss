@@ -1,0 +1,25 @@
+@import '../../../styles/palette';
+
+.list {
+  width: 100%;
+  padding: 1rem;
+  list-style-type: none;
+  gap: 20px;
+
+  .item {
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+    border-radius: 16px;
+    text-align: center;
+    margin: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 40px 0;
+
+    &:hover {
+      box-shadow: 0 2px 4px $waffle_black;
+      transform: scale(1.02);
+    }
+  }
+}

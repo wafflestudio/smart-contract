@@ -1,0 +1,23 @@
+.wrapper {
+  height: 100%;
+
+  .waffleTable {
+    width: 100%;
+    height: calc(100% - 140px);
+
+    td {
+      padding: 1rem;
+      .waffleWrapper {
+        height: 100%;
+      }
+    }
+  }
+}
+
+.loader {
+  position: fixed;
+  width: 100px;
+  height: 100px;
+  left: calc(50vw - 50px);
+  top: calc(50vh - 20px);
+}
