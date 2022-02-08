@@ -18,8 +18,11 @@
 
 .main {
   min-height: calc(100vh - 60px);
+  margin: 0 auto;
   height: calc(100vh - 60px);
   padding: 2rem 4rem;
+  max-width: 1000px;
+  min-width: 320px;
 }
 
 .footer {
