@@ -8,12 +8,16 @@ import "./interface/INftTransferProxy.sol";
 import "./interface/IERC20TransferProxy.sol";
 import "./interface/IWaffleExchange.sol";
 import "./WaffleExchangeProxyHandler.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
     /**
      * @dev 거래 수수료
      */
     uint8 private exchangeFee;
+
+    using Counters for Counters.Counter;
+    Counters.Counter private _latestOrderId;
 
     constructor(
         INftTransferProxy nftTransferProxy,
@@ -29,7 +33,8 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
         LibAsset.Asset calldata makerAsset,
         LibAsset.Asset calldata takerAsset
     ) external returns (uint256) {
-        uint256 id = _getRandom(makerAsset.assetType.data);
+        _latestOrderId.increment();
+        uint256 id = _latestOrderId.current();
         orders.push(
             LibOrder.Order(
                 maker,
@@ -84,10 +89,5 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
         // proxies[].transfer()
         // taker -> maker (96.7% of order.takerAsset)
         // proxies[].transfer()
-    }
-
-    function _getRandom(bytes memory data) internal view returns (uint256) {
-        return
-            uint256(keccak256(abi.encode(block.timestamp, msg.sender, data)));
     }
 }
