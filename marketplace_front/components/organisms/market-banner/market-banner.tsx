@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import Link from 'next/link';
 
 import styles from './market-banner.module.scss';
 
