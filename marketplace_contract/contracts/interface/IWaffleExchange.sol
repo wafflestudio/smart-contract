@@ -14,7 +14,7 @@ abstract contract IWaffleExchange {
      */
     function registerOrder(
         address maker,
-        LibAsset.Asset calldata makeAsset,
+        LibAsset.Asset calldata makerAsset,
         LibAsset.Asset calldata takerAsset
     ) external virtual returns (uint256);
 

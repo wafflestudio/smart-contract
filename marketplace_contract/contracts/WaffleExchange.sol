@@ -49,8 +49,10 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
         LibAsset.Asset calldata takerAsset
     ) external returns (bool) {
         LibOrder.Order order = orderOf(id);
-        _validateOrder(order);
+        _validateOrder(order, taker, takerAsset);
         _matchAndTransfer(order, taker, takerAsset);
+        order.taker = taker;
+        order.status = LibOrder.OrderStatus.completed;
         return true;
     }
 
@@ -73,12 +75,15 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
         // require : does taker have enough balance?
     }
 
-    function _matchAndTransfer(LibOrder.Order memory order) internal {
-        // maker -> taker (100% of order.makeAsset)
+    function _matchAndTransfer(
+        LibOrder.Order memory order,
+        address taker,
+        LibAsset.Asset takerAsset
+    ) internal {
+        // maker -> taker (100% of order.makerAsset)
         // proxies[].transfer()
-        // taker -> maker (96.7% of order.takeAsset)
+        // taker -> maker (96.7% of order.takerAsset)
         // proxies[].transfer()
-        order.status = LibOrder.OrderStatus.completed;
     }
 
     function _getRandom(bytes memory data) internal view returns (uint256) {
