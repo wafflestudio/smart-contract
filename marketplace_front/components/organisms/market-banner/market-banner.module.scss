@@ -1,0 +1,41 @@
+@import 'styles/palette';
+
+.wrapper {
+  background-color: $waffle_black;
+  border-radius: 8px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 28px;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  transition: 0.2s all;
+
+  &:hover {
+    padding-right: 32px;
+  }
+
+  &:before {
+    background: url(https://techsocialnetwork.org/wp-content/uploads/2021/09/NFT-Marketplace.png);
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 40%;
+    object-fit: contain;
+    background-position: center;
+    background-size: cover;
+    border-radius: 8px;
+    -webkit-mask-image: -webkit-gradient(linear, left top, right bottom, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0.3)));
+    transition: 0.2s all;
+  }
+
+  &:hover::before {
+    transform: scale(1.1);
+  }
+}
