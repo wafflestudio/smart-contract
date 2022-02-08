@@ -1,14 +1,16 @@
 import { PropsWithChildren } from 'react';
 
+import classNames from 'classnames';
 import Head from 'next/head';
 
 import styles from './layout.module.scss';
 
 interface Props {
   title?: string;
+  className?: string;
 }
 
-export const Layout = ({ children, title = 'Waffle Token Marketplace' }: PropsWithChildren<Props>) => {
+export const Layout = ({ children, title = 'Waffle Token Marketplace', className }: PropsWithChildren<Props>) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -19,7 +21,7 @@ export const Layout = ({ children, title = 'Waffle Token Marketplace' }: PropsWi
 
       <header className={styles.header}>{title}</header>
 
-      <main className={styles.main}>{children}</main>
+      <main className={classNames(className, styles.main)}>{children}</main>
 
       <footer className={styles.footer} />
     </div>

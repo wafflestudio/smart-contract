@@ -1,5 +1,15 @@
-import { Layout } from '../../templates/layout';
+import { HomeTransferHistory, MarketBanner } from '../../organisms';
+import { Layout, HomeTokenList, CreateToken } from '../../templates';
+
+import styles from './home.module.scss';
 
 export const Home = () => {
-  return <Layout>home</Layout>;
+  return (
+    <Layout className={styles.wrapper}>
+      <HomeTokenList className={styles.tokenList} />
+      <MarketBanner className={styles.goMarket} />
+      <CreateToken />
+      <HomeTransferHistory />
+    </Layout>
+  );
 };
