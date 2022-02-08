@@ -91,8 +91,7 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
             keccak256(abi.encodePacked(order.takerAsset.assetType.data)) ==
                 keccak256(abi.encodePacked(takerAsset.assetType.data))
         );
-        // TODO
-        // check if the taker has enough balance
+        require(_getBalance(taker, takerAsset) >= takerAsset.value);
     }
 
     function _matchAndTransfer(LibOrder.Order memory order, address taker)
@@ -101,7 +100,31 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
         // FIXME
         // maker -> taker (100% of order.makerAsset)
         // proxies[].transfer()
-        // taker -> maker (96.7% of order.takerAsset)
+        // taker -> maker (round up of 96.7% of order.takerAsset)
         // proxies[].transfer()
+    }
+
+    function _getBalance(address account, LibAsset.Asset memory asset)
+        internal
+        returns (uint256)
+    {
+        if (asset.assetType.assetClass == LibAsset.ERC20_ASSET_CLASS) {
+            address token = abi.decode(asset.assetType.data, (address));
+            return IERC20(token).balanceOf(account);
+        } else if (asset.assetType.assetClass == LibAsset.ERC721_ASSET_CLASS) {
+            (address token, uint256 tokenId) = abi.decode(
+                asset.assetType.data,
+                (address, uint256)
+            );
+            require(asset.value == 1, "erc721 value error");
+            return IERC721(token).balanceOf(account);
+        } else if (asset.assetType.assetClass == LibAsset.ERC1155_ASSET_CLASS) {
+            (address token, uint256 tokenId) = abi.decode(
+                asset.assetType.data,
+                (address, uint256)
+            );
+            return IERC1155(token).balanceOf(account, tokenId);
+        }
+        return 0;
     }
 }
