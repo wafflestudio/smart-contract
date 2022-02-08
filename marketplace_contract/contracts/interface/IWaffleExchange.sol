@@ -55,12 +55,4 @@ abstract contract IWaffleExchange {
         external
         virtual
         returns (bool);
-
-    function _validateOrder(LibOrder.Order memory order) internal virtual;
-
-    function _matchAndTransfer(LibOrder.Order memory order) internal virtual;
-
-    // {
-    //     proxy를 통해 transfer
-    // }
 }

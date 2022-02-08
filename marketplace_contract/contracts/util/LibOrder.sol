@@ -13,9 +13,9 @@ library LibOrder {
 
     struct Order {
         address maker;
-        LibAsset.Asset makeAsset;
+        LibAsset.Asset makerAsset;
         address taker;
-        LibAsset.Asset takeAsset;
+        LibAsset.Asset takerAsset;
         uint256 id;
         OrderStatus status;
     }
