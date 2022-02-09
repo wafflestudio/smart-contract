@@ -15,7 +15,8 @@ async function main() {
 
   // We get the contract to deploy
   const WaffleExchange = await ethers.getContractFactory("WaffleExchange");
-  const waffleExchange = await WaffleExchange.deploy();
+  // FIXME: nftProxy address, erc20Proxy address
+  const waffleExchange = await WaffleExchange.deploy("0", "0", 30);
 
   await waffleExchange.deployed();
 

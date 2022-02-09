@@ -59,7 +59,7 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
     ) external virtual override returns (bool) {
         LibOrder.Order memory order = orderOf[id];
         _validateOrder(order, taker, takerAsset);
-        _matchAndTransfer(order, taker);
+        _matchAndTransfer(order);
         order.taker = taker;
         order.status = LibOrder.OrderStatus.completed;
         return true;
@@ -122,7 +122,7 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
         );
     }
 
-    function _matchAndTransfer(LibOrder.Order memory order, address taker)
+    function _matchAndTransfer(LibOrder.Order memory order)
         internal
     {
         // maker -> taker
@@ -144,7 +144,7 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
             address token = abi.decode(asset.assetType.data, (address));
             return IERC20(token).balanceOf(account);
         } else if (asset.assetType.assetClass == LibAsset.ERC721_ASSET_CLASS) {
-            (address token, uint256 tokenId) = abi.decode(
+            (address token, ) = abi.decode(
                 asset.assetType.data,
                 (address, uint256)
             );
