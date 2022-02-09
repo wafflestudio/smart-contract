@@ -151,6 +151,61 @@ describe("WafffleToken contract", function () {
       expect(waffle_counter).to.equal(correct_base_number+1);
     });
 
+    it("minting multiple tokens",async function() {
+
+      const options = {value: ethers.utils.parseEther("1.0")};
+
+      let correct_base_number = 5;
+
+      for(var i=0;i<31;i++){
+        
+        let cur_str = "New Waffle"+String(i);
+        await hardhatToken.connect(addr1).claimRandomWaffle(cur_str,[],options);
+
+        let taken = await hardhatToken.showTaken.call(); 
+  
+        let waffle_counter = 0;
+  
+        for(var v of taken){
+          if(v)waffle_counter++;
+        }
+
+        correct_base_number++;
+
+        expect(waffle_counter).to.equal(correct_base_number);
+      }
+      
+    });
+
+    it("fail minting tokens with already takens",async function() {
+
+      const options = {value: ethers.utils.parseEther("1.0")};
+
+      let correct_base_number = 5;
+
+      for(var i=0;i<31;i++){
+        let cur_str = "New Waffle"+String(i);
+        await hardhatToken.connect(addr1).claimRandomWaffle(cur_str,[],options);
+
+        let taken = await hardhatToken.showTaken.call(); 
+  
+        let waffle_counter = 0;
+  
+        for(var v of taken){
+          if(v)waffle_counter++;
+        }
+
+        correct_base_number++;
+
+        expect(waffle_counter).to.equal(correct_base_number);
+      }
+
+      await expect(
+        hardhatToken.connect(addr1).claimRandomWaffle("Extra token",[],options)
+      ).to.be.revertedWith("all WFTK are already taken");
+      
+    });
+
   });
 
   describe("Transfer", function() {
