@@ -35,6 +35,10 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
     ) external virtual override returns (uint256) {
         _latestOrderId.increment();
         uint256 id = _latestOrderId.current();
+        require(
+            _getBalance(maker, makerAsset) >= makerAsset.value,
+            "maker should have enough asset"
+        );
         orders.push(
             LibOrder.Order(
                 maker,
@@ -68,9 +72,15 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
         returns (bool)
     {
         LibOrder.Order memory order = orderOf[id];
-        require(order.maker == msg.sender);
-        require(order.maker == maker);
-        require(order.status == LibOrder.OrderStatus.onSale);
+        require(
+            order.maker == msg.sender,
+            "message sender should be maker of the order"
+        );
+        require(order.maker == maker, "maker of the order should match maker");
+        require(
+            order.status == LibOrder.OrderStatus.onSale,
+            "the order should be on sale"
+        );
         order.status = LibOrder.OrderStatus.completed;
         return true;
     }
@@ -80,18 +90,36 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
         address taker,
         LibAsset.Asset memory takerAsset
     ) internal {
-        require(order.taker == address(0));
-        require(order.status == LibOrder.OrderStatus.onSale);
-        require(order.takerAsset.value == takerAsset.value);
+        require(
+            order.taker == address(0),
+            "taker of the order should be blank"
+        );
+        require(
+            order.status == LibOrder.OrderStatus.onSale,
+            "the order should be on sale"
+        );
+        require(
+            order.takerAsset.value == takerAsset.value,
+            "takerAsset should match"
+        );
         require(
             order.takerAsset.assetType.assetClass ==
                 takerAsset.assetType.assetClass
         );
         require(
             keccak256(abi.encodePacked(order.takerAsset.assetType.data)) ==
-                keccak256(abi.encodePacked(takerAsset.assetType.data))
+                keccak256(abi.encodePacked(takerAsset.assetType.data)),
+            "takerAsset should match"
         );
-        require(_getBalance(taker, takerAsset) >= takerAsset.value);
+        require(
+            _getBalance(taker, takerAsset) >= takerAsset.value,
+            "taker should have enough asset"
+        );
+        require(
+            _getBalance(order.maker, order.makerAsset) >=
+                order.makerAsset.value,
+            "maker should have enough asset"
+        );
     }
 
     function _matchAndTransfer(LibOrder.Order memory order, address taker)
