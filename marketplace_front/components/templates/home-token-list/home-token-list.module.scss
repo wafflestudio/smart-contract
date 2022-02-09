@@ -1,0 +1,33 @@
+@import 'styles/palette';
+
+.wrapper {
+  padding: 32px;
+  position: relative;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba($waffle_pink, 0.4);
+
+  .description {
+    position: absolute;
+    top: 48px;
+    right: 48px;
+    width: 360px;
+  }
+
+  .previewList {
+    position: absolute;
+    bottom: 32px;
+    right: 32px;
+    display: flex;
+    gap: 20px;
+
+    .preview {
+      width: 150px;
+      height: 150px;
+      transition: 0.2s all;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+}

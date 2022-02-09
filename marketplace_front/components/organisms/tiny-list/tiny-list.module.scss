@@ -1,0 +1,44 @@
+@import 'styles/palette';
+
+.wrapper {
+  list-style-type: none;
+  padding: 0;
+  overflow-y: scroll;
+  margin: 0;
+  height: calc(100% - 72px);
+
+  .item {
+    margin: 8px 0;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 16px;
+    position: relative;
+    padding-inline: 16px;
+    transition: all 0.2s;
+    display: flex;
+    justify-content: space-between;
+
+    .title {
+      margin: 0;
+    }
+
+    .caption {
+      color: #888;
+      font-size: 14px;
+    }
+
+    &:hover {
+      background-color: rgba($waffle_brown, 0.2);
+    }
+
+    &:before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 12px;
+      right: 12px;
+      content: '';
+      border-bottom: 1px solid rgba($waffle_brown, 0.4);
+    }
+  }
+}

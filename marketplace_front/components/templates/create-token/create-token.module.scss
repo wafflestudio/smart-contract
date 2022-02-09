@@ -1,0 +1,46 @@
+@import 'styles/palette';
+
+.wrapper {
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba($waffle_pink, 0.4);
+  padding: 14px 32px;
+  position: relative;
+  overflow: hidden;
+
+  &:before {
+    content: '';
+    background-image: url(https://wafflestudio.com/_next/image?url=%2Fimages%2Ficon_intro.svg&w=256&q=75);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    position: absolute;
+    left: 48px;
+    right: 48px;
+    top: -48px;
+    bottom: 48px;
+    height: calc(100% - 96px);
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.4s;
+  }
+
+  &:hover::before {
+    top: 48px;
+    opacity: 0.1;
+  }
+
+  .description {
+    position: absolute;
+    bottom: 20px;
+    right: 32px;
+    left: 32px;
+    word-break: break-all;
+  }
+
+  .mintbutton {
+    position: absolute;
+    right: 32px;
+    top: 32px;
+  }
+}
