@@ -93,7 +93,7 @@ describe("WafffleToken contract", function () {
 
   });
 
-  describe("Minting",function() {
+  describe("Mintintg",function() {
 
     let WaffleToken;
     let hardhatToken;
@@ -132,6 +132,47 @@ describe("WafffleToken contract", function () {
       expect(waffle_counter).to.equal(correct_base_number+1);
     });
 
+    it("minting new token with other addres",async function() {
+
+      const options = {value: ethers.utils.parseEther("1.0")};
+
+      await hardhatToken.connect(addr1).claimRandomWaffle("New Waffle",[],options);
+
+      let taken = await hardhatToken.showTaken.call(); 
+  
+      let waffle_counter = 0;
+  
+      for(var v of taken){
+        if(v)waffle_counter++;
+      }
+
+      let correct_base_number = 5;
+      
+      expect(waffle_counter).to.equal(correct_base_number+1);
+    });
+
+  });
+
+  describe("Transfer", function() {
+
+    let WaffleToken;
+    let hardhatToken;
+    let owner;
+    let addr1;
+    let addr2;
+    let addrs;
+
+    beforeEach(async function () {
+      // Get the ContractFactory and Signers here.
+      WaffleToken = await ethers.getContractFactory("WaffleToken");
+      [owner, addr1, addr2, ...addrs] = await ethers.getSigners();
+  
+      // To deploy our contract, we just have to call Token.deploy() and await
+      // for it to be deployed(), which happens once its transaction has been
+      // mined.
+      hardhatToken = await WaffleToken.deploy("");
+    });
+
     it("transfer owner to other",async function() {
       
       var basic_ids = new Array();
@@ -148,15 +189,20 @@ describe("WafffleToken contract", function () {
       }
 
       //console.log(basic_ids);
-
-      await hardhatToken.safeTransferFrom(owner.address,addr1.address,basic_ids[0],1,[]);
-
+      
       for(var i=0;i<5;i++){
-        let waffle_token_transferred_owner_address = await hardhatToken.waffleToOwner(basic_ids[i]);
-        console.log(waffle_token_transferred_owner_address);
-      }
+        let before_owner_balance = await hardhatToken.balanceOf(owner.address, basic_ids[i]);
+        let before_addr1_balance = await hardhatToken.balanceOf(addr1.address, basic_ids[i]);
 
-      //expect(waffle_token_transferred_owner_address).to.equal(addr1.address);
+        await hardhatToken.safeTransferFrom(owner.address,addr1.address,basic_ids[i],1,[]);
+
+        let after_owner_balance = await hardhatToken.balanceOf(owner.address, basic_ids[i]);
+        let after_addr1_balance = await hardhatToken.balanceOf(addr1.address, basic_ids[i]);
+
+        expect(before_owner_balance.toNumber()).to.equal(after_owner_balance.toNumber()+1);
+        expect(after_addr1_balance.toNumber()).to.equal(before_addr1_balance.toNumber()+1);
+      }
+      
     });
 
   });
