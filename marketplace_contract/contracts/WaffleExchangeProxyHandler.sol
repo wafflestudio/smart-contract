@@ -11,7 +11,7 @@ contract WaffleExchangeProxyHandler is Ownable {
     mapping (bytes4 => address) proxies;
 
     event ProxyChanged(bytes4 indexed assetType, address proxy);
-    event Transferred(LibAsset.Asset memory asset, address from, address to);
+    event Transferred(LibAsset.Asset asset, address from, address to);
 
     function initTransferProxy(INftTransferProxy transferProxy, IERC20TransferProxy erc20TransferProxy) internal {
         proxies[LibAsset.ERC20_ASSET_CLASS] = address(erc20TransferProxy);
