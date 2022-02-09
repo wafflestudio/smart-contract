@@ -6,7 +6,6 @@ import "./interface/INftTransferProxy.sol";
 import "./interface/IERC20TransferProxy.sol";
 import "./util/Ownable.sol";
 import "./util/LibAsset.sol";
-import "@rarible/lib-asset/contracts/LibAsset.sol";
 
 contract WaffleExchangeProxyHandler is Ownable {
     mapping (bytes4 => address) proxies;
