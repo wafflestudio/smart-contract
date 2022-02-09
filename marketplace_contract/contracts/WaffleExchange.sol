@@ -14,7 +14,7 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
     /**
      * @dev 거래 수수료
      */
-    uint8 private exchangeFee;
+    uint8 private exchangeFeeDenominator;
 
     using Counters for Counters.Counter;
     Counters.Counter private _latestOrderId;
@@ -22,10 +22,10 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
     constructor(
         INftTransferProxy nftTransferProxy,
         IERC20TransferProxy erc20TransferProxy,
-        uint8 _exchangeFee
+        uint8 _exchangeFeeDenominator
     ) {
         initTransferProxy(nftTransferProxy, erc20TransferProxy);
-        exchangeFee = _exchangeFee;
+        exchangeFeeDenominator = _exchangeFeeDenominator;
     }
 
     function registerOrder(
@@ -97,11 +97,15 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
     function _matchAndTransfer(LibOrder.Order memory order, address taker)
         internal
     {
-        // FIXME
-        // maker -> taker (100% of order.makerAsset)
-        // proxies[].transfer()
-        // taker -> maker (round up of 96.7% of order.takerAsset)
-        // proxies[].transfer()
+        // maker -> taker
+        transfer(order.makerAsset, order.maker, order.taker);
+        // taker -> maker
+        LibAsset.Asset memory makerReceivingAsset = LibAsset.Asset(
+            order.takerAsset.assetType,
+            order.takerAsset.value -
+                (order.takerAsset.value / exchangeFeeDenominator)
+        );
+        transfer(makerReceivingAsset, order.taker, order.maker);
     }
 
     function _getBalance(address account, LibAsset.Asset memory asset)
