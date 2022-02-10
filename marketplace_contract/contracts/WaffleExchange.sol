@@ -171,4 +171,8 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
     function getExchangeFee() external view returns (uint8) {
         return exchangeFeeDenominator;
     }
+
+    function getOrders() external view returns (LibOrder.Order[] memory) {
+        return orders;
+    }
 }
