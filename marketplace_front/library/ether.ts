@@ -1,5 +1,6 @@
 import { ethers } from 'ethers';
 
+import { marketAbi, marketAddress } from './contracts';
 export const provider =
   typeof window !== 'undefined' && 'ethereum' in window
     ? new ethers.providers.Web3Provider(
@@ -7,6 +8,8 @@ export const provider =
         // @ts-ignore
         window.ethereum
       )
-    : null;
+    : // If you don't specify a //url//, Ethers connects to the default
+      // (i.e. ``http:/\/localhost:8545``)
+      new ethers.providers.JsonRpcProvider();
 
-// export const contract = provider ? new ethers.Contract(WAFFLE_TOKEN_ADDRESS, WAFFLE_TOKEN_ABI, provider) : null;
+export const marketContract = new ethers.Contract(marketAddress, marketAbi, provider);
