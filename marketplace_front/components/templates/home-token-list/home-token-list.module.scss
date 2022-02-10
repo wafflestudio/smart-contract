@@ -21,6 +21,8 @@
     gap: 20px;
 
     .preview {
+      background-color: white;
+      border: none;
       width: 150px;
       height: 150px;
       transition: 0.2s all;
@@ -30,4 +32,24 @@
       }
     }
   }
+}
+.modalButton {
+  cursor: pointer;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+
+  background-color: burlywood;
+  border: 3px solid #b58259;
+}
+.smallButton {
+  cursor: pointer;
+  border-radius: 10%;
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  background-color: burlywood;
+  border: 3px solid #b58259;
 }
