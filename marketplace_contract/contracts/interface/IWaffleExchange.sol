@@ -7,6 +7,7 @@ import "../util/LibOrder.sol";
 abstract contract IWaffleExchange {
     LibOrder.Order[] public orders;
     mapping(uint256 => LibOrder.Order) public orderOf;
+    mapping(address => LibOrder.Order) public orderByMaker;
 
     /**
      * @dev NFT order 등록
