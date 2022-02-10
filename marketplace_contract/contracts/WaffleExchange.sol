@@ -38,7 +38,7 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
             _getBalance(maker, makeAsset) >= makeAsset.value,
             "maker should have enough asset"
         );
-        
+
         _latestOrderId.increment();
         uint256 id = _latestOrderId.current();
 
@@ -143,7 +143,7 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
                 (order.takeAsset.value / exchangeFeeDenominator)
         );
         transfer(makerReceivingAsset, order.taker, order.maker);
-        
+
         LibAsset.Asset memory ownerReceivingAsset = LibAsset.Asset(
             order.takeAsset.assetType,
             (order.takeAsset.value / exchangeFeeDenominator)
