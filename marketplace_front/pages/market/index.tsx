@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 
-import { Market } from '../../components/pages/market/market';
+import { Market } from '../../components/pages';
 const MarketPage: NextPage = () => {
   return <Market />;
 };

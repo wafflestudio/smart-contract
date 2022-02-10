@@ -1,4 +1,3 @@
-import { PageTitle } from '../../molecules/page-title/page-title';
 import { MarketBanner } from '../../organisms';
 import { Layout, HomeTokenList, CreateToken, HomeTransferHistory } from '../../templates';
 
