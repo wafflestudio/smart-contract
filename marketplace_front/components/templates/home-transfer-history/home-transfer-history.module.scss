@@ -1,0 +1,14 @@
+@import 'styles/palette';
+
+.wrapper {
+  padding: 14px 32px;
+  position: relative;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba($waffle_pink, 0.4);
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

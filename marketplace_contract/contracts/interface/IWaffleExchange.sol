@@ -2,25 +2,12 @@
 pragma solidity ^0.8.0;
 
 import "../util/LibAsset.sol";
+import "../util/LibOrder.sol";
 
 abstract contract IWaffleExchange {
-    enum OrderStatus {
-        canceled,
-        completed,
-        onSale
-    }
-
-    struct Order {
-        address maker;
-        LibAsset.Asset makeAsset;
-        address taker;
-        LibAsset.Asset takeAsset;
-        uint256 id;
-        OrderStatus status;
-    }
-
-    Order[] public orders;
-    mapping(uint256 => Order) public orderOf;
+    LibOrder.Order[] orders;
+    mapping(uint256 => LibOrder.Order) public orderOf;
+    mapping(address => LibOrder.Order) public orderByMaker;
 
     /**
      * @dev NFT order 등록
@@ -29,15 +16,15 @@ abstract contract IWaffleExchange {
     function registerOrder(
         address maker,
         LibAsset.Asset calldata makeAsset,
-        LibAsset.Asset calldata takerAsset
+        LibAsset.Asset calldata takeAsset
     ) external virtual returns (uint256);
 
     // {
     //     orders.push(Order {
     //         maker,
-    //         makerAsset,
+    //         makeAsset,
     //         address(0),
-    //         takerAsset,
+    //         takeAsset,
     //         onSale
     //     });
     // }
@@ -46,13 +33,13 @@ abstract contract IWaffleExchange {
      * @dev 등록된 NFT order 구매
      * @param taker taker address
      * @param id Order Id
-     * @param takerAsset taker asset
+     * @param takeAsset taker asset
      * @return 구매 성공 여부
      */
     function matchOrder(
         address taker,
         uint256 id,
-        LibAsset.Asset calldata takerAsset
+        LibAsset.Asset calldata takeAsset
     ) external virtual returns (bool);
 
     // {
@@ -69,12 +56,4 @@ abstract contract IWaffleExchange {
         external
         virtual
         returns (bool);
-
-    function _validateOrder(Order memory order) internal virtual;
-
-    function _matchAndTransfer(Order memory order) internal virtual;
-
-    // {
-    //     proxy를 통해 transfer
-    // }
 }

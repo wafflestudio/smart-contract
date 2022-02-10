@@ -1,5 +1,5 @@
-import { HomeTransferHistory, MarketBanner } from '../../organisms';
-import { Layout, HomeTokenList, CreateToken } from '../../templates';
+import { MarketBanner } from '../../organisms';
+import { Layout, HomeTokenList, CreateToken, HomeTransferHistory } from '../../templates';
 
 import styles from './home.module.scss';
 
