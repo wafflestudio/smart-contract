@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 import { useQuery } from 'react-query';
 
 import { provider } from '../../../library/ether';
@@ -13,8 +14,7 @@ export const useAddress = () =>
     },
     {
       onError: () => {
-        // toast.error('Metamask 에 계정이 한 개 올바르게 연결되어 있는지 확인해 주세요.');
-        alert('Metamask 에 계정이 한 개 올바르게 연결되어 있는지 확인해 주세요.');
+        toast.error('Metamask 에 계정이 올바르게 연결되어 있는지 확인해 주세요.');
       },
       enabled: !!provider,
     }
