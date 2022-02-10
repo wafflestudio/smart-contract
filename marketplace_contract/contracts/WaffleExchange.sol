@@ -40,16 +40,23 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
             _getBalance(maker, makerAsset) >= makerAsset.value,
             "maker should have enough asset"
         );
-        orders.push(
-            LibOrder.Order(
-                maker,
-                makerAsset,
-                address(0),
-                takerAsset,
-                id,
-                LibOrder.OrderStatus.onSale
-            )
-        );
+
+        {
+            LibOrder.Order memory newOrder = LibOrder.Order(
+                    maker,
+                    makerAsset,
+                    address(0),
+                    takerAsset,
+                    id,
+                    LibOrder.OrderStatus.onSale
+                );
+
+            orders.push(newOrder);
+            orderOf[id] = newOrder;
+            orderByMaker[maker] = newOrder;
+        }
+
+        emit OrderRegistered(maker, makerAsset, takerAsset, id);
         return id;
     }
 
