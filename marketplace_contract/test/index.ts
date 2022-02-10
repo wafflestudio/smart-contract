@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
-import { Contract, ethers as etherjs } from "ethers";
+import { Contract } from "ethers";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import { asset, encodeAbi, ERC721, ERC20 } from "./util/index";
 
@@ -85,7 +85,7 @@ describe("WaffleExchange", function () {
     expect(makeAsset).to.eql(registeredOrderMakerAsset);
     expect(takeAsset).to.eql(registeredOrderTakerAsset);
   });
-  it("Should match order with correct maker asset and taker asset", async function () {
+  it("Should match order success with correct maker asset and taker asset", async function () {
     const testErc721 = await (
       await ethers.getContractFactory("TestERC721")
     ).deploy("testName", "testSymbol");
@@ -110,6 +110,36 @@ describe("WaffleExchange", function () {
     );
 
     await waffleExchange.matchOrder(ordertaker.address, 1, takeAsset);
+  });
+  it("Should match order reverted with incorrect maker asset and taker asset", async function () {
+    const testErc721 = await (
+      await ethers.getContractFactory("TestERC721")
+    ).deploy("testName", "testSymbol");
+
+    testErc721.mint(orderMaker.address, 7, "");
+    testErc721.connect(orderMaker).approve(nftProxy.address, 7);
+
+    const testErc20 = await (
+      await ethers.getContractFactory("TestERC20")
+    ).deploy("waffleCoin", "waffle");
+
+    testErc20.mint(ordertaker.address, 1000);
+    testErc20.connect(ordertaker).approve(erc20Proxy.address, 10);
+
+    const makeAsset = asset(ERC721, encodeAbi(testErc721.address, 7), 1);
+    const takeAsset = asset(ERC20, encodeAbi(testErc20.address), 10);
+
+    await waffleExchange.registerOrder(
+      orderMaker.address,
+      makeAsset,
+      takeAsset
+    );
+
+    const insufficientTakeAsset = asset(ERC20, encodeAbi(testErc20.address), 1);
+
+    await expect(
+      waffleExchange.matchOrder(ordertaker.address, 1, insufficientTakeAsset)
+    ).to.be.revertedWith("takerAsset should match");
   });
   it("Should return proxy addresses once it's initilaized or changed", async function () {
     // TODO : proxy 정보를 불러오는 함수를 추가해야 합니다
