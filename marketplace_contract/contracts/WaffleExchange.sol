@@ -160,4 +160,8 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
         }
         return 0;
     }
+
+    function getExchangeFee() external view returns (uint8) {
+        return exchangeFeeDenominator;
+    }
 }
