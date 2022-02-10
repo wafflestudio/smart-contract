@@ -9,10 +9,20 @@ import Modal from 'react-modal';
 
 interface Props {
   className?: string;
+  tokenName?: string;
 }
+
+const GetTokenInfo = (tokenAddress: string) => {
+  return 'test!'; // should be connected to backend / ie) const result = await GetTokenInfoFromBackend(address)
+};
+
+export const Test = ({ tokenName }: Props) => {
+  return <div>{tokenName}</div>;
+};
 
 export const HomeTokenList = ({ className }: Props) => {
   const [isCreateModalOpen, setCreateModalOpen] = useState<boolean>(false);
+  const [tokenName, setTokenName] = useState<string>('');
 
   return (
     <section className={classNames(className, styles.wrapper)}>
@@ -43,24 +53,40 @@ export const HomeTokenList = ({ className }: Props) => {
               setCreateModalOpen(false);
             }}
           >
-            Token Name: 춘식이
-            <br />
-            Seller Address: <br />
-            Price: 0eth
+            <Test tokenName={tokenName}></Test>
             <br /> <button className={styles.smallButton}>↵</button>
           </Modal>
         </div>
-        <img className={styles.preview} src="https://cdn-icons-png.flaticon.com/512/25/25231.png" />
-        <button className={styles.modalButton} onClick={() => setCreateModalOpen(true)}></button>
-
-        <img className={styles.preview} src="https://cdn.worldvectorlogo.com/logos/gitlab.svg" />
-        <button className={styles.modalButton} onClick={() => setCreateModalOpen(true)}></button>
-
-        <img
-          className={styles.preview}
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Bitbucket-blue-logomark-only.svg/1200px-Bitbucket-blue-logomark-only.svg.png"
-        />
-        <button className={styles.modalButton} onClick={() => setCreateModalOpen(true)}></button>
+        <button className={styles.preview}>
+          <img
+            className={styles.preview}
+            src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
+            onClick={() => {
+              setTokenName('GITHUB');
+              setCreateModalOpen(true);
+            }}
+          />
+        </button>
+        <button className={styles.preview}>
+          <img
+            className={styles.preview}
+            src="https://cdn.worldvectorlogo.com/logos/gitlab.svg"
+            onClick={() => {
+              setTokenName('GITLAB');
+              setCreateModalOpen(true);
+            }}
+          />
+        </button>
+        <button className={styles.preview}>
+          <img
+            className={styles.preview}
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Bitbucket-blue-logomark-only.svg/1200px-Bitbucket-blue-logomark-only.svg.png"
+            onClick={() => {
+              setTokenName('BITBUCKET');
+              setCreateModalOpen(true);
+            }}
+          />
+        </button>
       </div>
     </section>
   );
