@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import { Typography } from '../../atoms/typography/typography';
-import { TinyList } from '../../organisms/tiny-list/tiny-list';
+import { Typography } from '../../atoms';
+import { TinyList } from '../../organisms';
 
 import styles from './home-transfer-history.module.scss';
 

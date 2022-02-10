@@ -1,5 +1,5 @@
-import { Typography } from '../../atoms/typography/typography';
-import { MintButton } from '../../molecules/mint-button/mint-button';
+import { Typography } from '../../atoms';
+import { MintButton } from '../../molecules';
 
 import styles from './create-token.module.scss';
 
