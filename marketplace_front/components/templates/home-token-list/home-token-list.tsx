@@ -3,8 +3,8 @@ import { useState } from 'react';
 import classNames from 'classnames';
 import Modal from 'react-modal';
 
-import { Typography } from '../../atoms/typography/typography';
-import { TokenInfo } from '../../organisms/token-info/token-info';
+import { Typography } from '../../atoms';
+import { TokenInfo } from '../../organisms';
 
 import styles from './home-token-list.module.scss';
 

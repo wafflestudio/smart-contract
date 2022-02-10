@@ -1,4 +1,4 @@
-import { Typography } from '../../atoms/typography/typography';
+import { Typography } from '../../atoms';
 import { Token } from '../../templates';
 
 import styles from './token-info.module.scss';

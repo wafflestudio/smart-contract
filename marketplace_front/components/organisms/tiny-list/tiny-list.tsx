@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-import { Typography } from '../../atoms/typography/typography';
+import { Typography } from '../../atoms';
 
 import styles from './tiny-list.module.scss';
 
