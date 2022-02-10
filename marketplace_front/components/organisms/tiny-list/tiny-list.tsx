@@ -1,5 +1,3 @@
-import { ReactNode } from 'react';
-
 import classNames from 'classnames';
 
 import { Typography } from '../../atoms/typography/typography';

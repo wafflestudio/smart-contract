@@ -1,20 +1,16 @@
+import { useState } from 'react';
+
 import classNames from 'classnames';
+import Modal from 'react-modal';
 
 import { Typography } from '../../atoms/typography/typography';
 
 import styles from './home-token-list.module.scss';
 
-import { useState } from 'react';
-import Modal from 'react-modal';
-
 interface Props {
   className?: string;
   tokenName?: string;
 }
-
-const GetTokenInfo = (tokenAddress: string) => {
-  return 'test!'; // should be connected to backend / ie) const result = await GetTokenInfoFromBackend(address)
-};
 
 export const Test = ({ tokenName }: Props) => {
   return <div>{tokenName}</div>;
