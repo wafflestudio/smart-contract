@@ -6,27 +6,8 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  // Hardhat always runs the compile task when running scripts with its command
-  // line interface.
-  //
-  // If this script is run directly using `node` you may want to call compile
-  // manually to make sure everything is compiled
-  // await hre.run('compile');
-
-  // We get the contract to deploy
-  // const WaffleExchange = await ethers.getContractFactory("WaffleExchange");
-  // // FIXME: nftProxy address, erc20Proxy address
-  // const waffleExchange = await WaffleExchange.deploy("0", "0", 30);
-
-  // await waffleExchange.deployed();
   console.log("on deploying...");
 
-  // const nftProxyFactory = await ethers.getContractFactory("NftTransferProxy");
-  // const nftProxy = await nftProxyFactory.deploy();
-  // console.log("야야...");
-  // console.log(nftProxy);
-
-  // await nftProxy.deployed();
   const nftProxy = await (
     await ethers.getContractFactory("NftTransferProxy")
   ).deploy();
@@ -57,8 +38,7 @@ async function main() {
   await nftProxy.addOperator(waffleExchange.address);
   await erc20Proxy.addOperator(waffleExchange.address);
   console.log("waffleExchange added to proxies as operator");
-
-  console.log("WaffleExchange deployed to:", waffleExchange.address);
+  console.log("Contracts deployment and proxy setting completed");
 }
 
 // We recommend this pattern to be able to use async/await everywhere
