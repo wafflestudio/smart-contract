@@ -15,16 +15,16 @@ abstract contract IWaffleExchange {
      */
     function registerOrder(
         address maker,
-        LibAsset.Asset calldata makerAsset,
-        LibAsset.Asset calldata takerAsset
+        LibAsset.Asset calldata makeAsset,
+        LibAsset.Asset calldata takeAsset
     ) external virtual returns (uint256);
 
     // {
     //     orders.push(Order {
     //         maker,
-    //         makerAsset,
+    //         makeAsset,
     //         address(0),
-    //         takerAsset,
+    //         takeAsset,
     //         onSale
     //     });
     // }
@@ -33,13 +33,13 @@ abstract contract IWaffleExchange {
      * @dev 등록된 NFT order 구매
      * @param taker taker address
      * @param id Order Id
-     * @param takerAsset taker asset
+     * @param takeAsset taker asset
      * @return 구매 성공 여부
      */
     function matchOrder(
         address taker,
         uint256 id,
-        LibAsset.Asset calldata takerAsset
+        LibAsset.Asset calldata takeAsset
     ) external virtual returns (bool);
 
     // {

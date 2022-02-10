@@ -37,7 +37,7 @@ describe("WaffleExchange", function () {
     await nftProxy.connect(exchangeAdmin).addOperator(waffleExchange.address);
     await erc20Proxy.connect(exchangeAdmin).addOperator(waffleExchange.address);
   });
-  it("Should return exchange fee dominator once it's deployed", async function () {
+  it("Should return exchange fee denominator once it's deployed", async function () {
     const exchangeFee = await waffleExchange.getExchangeFee();
     expect(fee).to.equal(exchangeFee);
   });
@@ -68,18 +68,18 @@ describe("WaffleExchange", function () {
 
     const registeredOrderMakerAsset = {
       assetType: {
-        assetClass: registeredOrder.makerAsset.assetType.assetClass,
-        data: registeredOrder.makerAsset.assetType.data,
+        assetClass: registeredOrder.makeAsset.assetType.assetClass,
+        data: registeredOrder.makeAsset.assetType.data,
       },
-      value: registeredOrder.makerAsset.value.toNumber(),
+      value: registeredOrder.makeAsset.value.toNumber(),
     };
 
     const registeredOrderTakerAsset = {
       assetType: {
-        assetClass: registeredOrder.takerAsset.assetType.assetClass,
-        data: registeredOrder.takerAsset.assetType.data,
+        assetClass: registeredOrder.takeAsset.assetType.assetClass,
+        data: registeredOrder.takeAsset.assetType.data,
       },
-      value: registeredOrder.takerAsset.value.toNumber(),
+      value: registeredOrder.takeAsset.value.toNumber(),
     };
 
     expect(makeAsset).to.eql(registeredOrderMakerAsset);
@@ -89,18 +89,18 @@ describe("WaffleExchange", function () {
 
     const lastInOrderListMakerAsset = {
       assetType: {
-        assetClass: orders[orders.length - 1].makerAsset.assetType.assetClass,
-        data: orders[orders.length - 1].makerAsset.assetType.data,
+        assetClass: orders[orders.length - 1].makeAsset.assetType.assetClass,
+        data: orders[orders.length - 1].makeAsset.assetType.data,
       },
-      value: orders[orders.length - 1].makerAsset.value.toNumber(),
+      value: orders[orders.length - 1].makeAsset.value.toNumber(),
     };
 
     const lastInOrderListTakerAsset = {
       assetType: {
-        assetClass: orders[orders.length - 1].takerAsset.assetType.assetClass,
-        data: orders[orders.length - 1].takerAsset.assetType.data,
+        assetClass: orders[orders.length - 1].takeAsset.assetType.assetClass,
+        data: orders[orders.length - 1].takeAsset.assetType.data,
       },
-      value: orders[orders.length - 1].takerAsset.value.toNumber(),
+      value: orders[orders.length - 1].takeAsset.value.toNumber(),
     };
 
     expect(makeAsset).to.eql(lastInOrderListMakerAsset);
@@ -160,7 +160,7 @@ describe("WaffleExchange", function () {
 
     await expect(
       waffleExchange.matchOrder(ordertaker.address, 1, insufficientTakeAsset)
-    ).to.be.revertedWith("takerAsset should match");
+    ).to.be.revertedWith("takeAsset should match");
   });
   it("Should return proxy addresses once it's initilaized or changed", async function () {
     // TODO : proxy 정보를 불러오는 함수를 추가해야 합니다

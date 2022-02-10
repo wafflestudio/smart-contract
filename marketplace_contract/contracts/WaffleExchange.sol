@@ -19,7 +19,7 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
     using Counters for Counters.Counter;
     Counters.Counter private _latestOrderId;
 
-    event OrderRegistered(address indexed maker, LibAsset.Asset makerAsset, LibAsset.Asset takerAsset, uint256 id);
+    event OrderRegistered(address indexed maker, LibAsset.Asset makeAsset, LibAsset.Asset takeAsset, uint256 id);
     constructor(
         INftTransferProxy nftTransferProxy,
         IERC20TransferProxy erc20TransferProxy,
@@ -31,22 +31,22 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
 
     function registerOrder(
         address maker,
-        LibAsset.Asset calldata makerAsset,
-        LibAsset.Asset calldata takerAsset
+        LibAsset.Asset calldata makeAsset,
+        LibAsset.Asset calldata takeAsset
     ) external virtual override returns (uint256) {
         _latestOrderId.increment();
         uint256 id = _latestOrderId.current();
         require(
-            _getBalance(maker, makerAsset) >= makerAsset.value,
+            _getBalance(maker, makeAsset) >= makeAsset.value,
             "maker should have enough asset"
         );
 
         {
             LibOrder.Order memory newOrder = LibOrder.Order(
                     maker,
-                    makerAsset,
+                    makeAsset,
                     address(0),
-                    takerAsset,
+                    takeAsset,
                     id,
                     LibOrder.OrderStatus.onSale
                 );
@@ -56,17 +56,17 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
             orderByMaker[maker] = newOrder;
         }
 
-        emit OrderRegistered(maker, makerAsset, takerAsset, id);
+        emit OrderRegistered(maker, makeAsset, takeAsset, id);
         return id;
     }
 
     function matchOrder(
         address taker,
         uint256 id,
-        LibAsset.Asset calldata takerAsset
+        LibAsset.Asset calldata takeAsset
     ) external virtual override returns (bool) {
         LibOrder.Order memory order = orderOf[id];
-        _validateOrder(order, taker, takerAsset);
+        _validateOrder(order, taker, takeAsset);
         order.taker = taker;
         order.status = LibOrder.OrderStatus.completed;
         _matchAndTransfer(order);
@@ -96,7 +96,7 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
     function _validateOrder(
         LibOrder.Order memory order,
         address taker,
-        LibAsset.Asset memory takerAsset
+        LibAsset.Asset memory takeAsset
     ) internal {
         require(
             order.taker == address(0),
@@ -107,25 +107,25 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
             "the order should be on sale"
         );
         require(
-            order.takerAsset.value == takerAsset.value,
-            "takerAsset should match"
+            order.takeAsset.value == takeAsset.value,
+            "takeAsset should match"
         );
         require(
-            order.takerAsset.assetType.assetClass ==
-                takerAsset.assetType.assetClass
+            order.takeAsset.assetType.assetClass ==
+                takeAsset.assetType.assetClass
         );
         require(
-            keccak256(abi.encodePacked(order.takerAsset.assetType.data)) ==
-                keccak256(abi.encodePacked(takerAsset.assetType.data)),
-            "takerAsset should match"
+            keccak256(abi.encodePacked(order.takeAsset.assetType.data)) ==
+                keccak256(abi.encodePacked(takeAsset.assetType.data)),
+            "takeAsset should match"
         );
         require(
-            _getBalance(taker, takerAsset) >= takerAsset.value,
+            _getBalance(taker, takeAsset) >= takeAsset.value,
             "taker should have enough asset"
         );
         require(
-            _getBalance(order.maker, order.makerAsset) >=
-                order.makerAsset.value,
+            _getBalance(order.maker, order.makeAsset) >=
+                order.makeAsset.value,
             "maker should have enough asset"
         );
     }
@@ -134,12 +134,12 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
         internal
     {
         // maker -> taker
-        transfer(order.makerAsset, order.maker, order.taker);
+        transfer(order.makeAsset, order.maker, order.taker);
         // taker -> maker
         LibAsset.Asset memory makerReceivingAsset = LibAsset.Asset(
-            order.takerAsset.assetType,
-            order.takerAsset.value -
-                (order.takerAsset.value / exchangeFeeDenominator)
+            order.takeAsset.assetType,
+            order.takeAsset.value -
+                (order.takeAsset.value / exchangeFeeDenominator)
         );
         transfer(makerReceivingAsset, order.taker, order.maker);
     }
