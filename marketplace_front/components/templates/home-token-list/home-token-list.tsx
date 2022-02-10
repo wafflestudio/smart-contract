@@ -4,10 +4,11 @@ import classNames from 'classnames';
 import Modal from 'react-modal';
 
 import { Typography } from '../../atoms/typography/typography';
+import { TokenInfo } from '../../organisms/token-info/token-info';
 
 import styles from './home-token-list.module.scss';
 
-enum Token {
+export enum Token {
   GITHUB = 'Github',
   GITLAB = 'Gitlab',
   BITBUCKET = 'Bitbucket',
@@ -46,25 +47,11 @@ export const HomeTokenList = ({ className }: Props) => {
       </section>
       <Modal
         isOpen={openToken !== null}
-        style={{
-          content: {
-            width: 700,
-            height: 400,
-            margin: 'auto',
-
-            border: '5px solid #b58259',
-            background: 'bisque',
-            overflow: 'auto',
-            WebkitOverflowScrolling: 'touch',
-            borderRadius: 10,
-            padding: '10px 20px',
-          },
-          overlay: { zIndex: 9 },
-        }}
+        style={{ overlay: { zIndex: 9 } }}
+        className={styles.modalContent}
         onRequestClose={() => setOpenToken(null)}
       >
-        <Typography as="h2">{openToken}</Typography>
-        <button className={styles.smallButton}>↵</button>
+        <TokenInfo openToken={openToken} />
       </Modal>
     </>
   );
