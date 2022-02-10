@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
-import { Contract } from "ethers";
+import { Contract, ethers as etherjs } from "ethers";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import { asset, encodeAbi, ERC721, ERC20 } from "./util/index";
 
@@ -10,26 +10,26 @@ describe("WaffleExchange", function () {
   let erc20Proxy: Contract;
   let exchangeAdmin: SignerWithAddress;
   let orderMaker: SignerWithAddress;
-  let ordertaker: SignerWithAddress;
+  let orderTaker: SignerWithAddress;
 
   let fee: number;
 
   beforeEach(async () => {
-    [exchangeAdmin, orderMaker, ordertaker] = await ethers.getSigners();
+    [exchangeAdmin, orderMaker, orderTaker] = await ethers.getSigners();
 
     nftProxy = await (await ethers.getContractFactory("NftTransferProxy"))
-      .connect(exchangeAdmin)
-      .deploy();
+        .connect(exchangeAdmin)
+        .deploy();
 
     erc20Proxy = await (await ethers.getContractFactory("ERC20TransferProxy"))
-      .connect(exchangeAdmin)
-      .deploy();
+        .connect(exchangeAdmin)
+        .deploy();
 
     fee = 30;
 
     waffleExchange = await (await ethers.getContractFactory("WaffleExchange"))
-      .connect(exchangeAdmin)
-      .deploy(nftProxy.address, erc20Proxy.address, fee);
+        .connect(exchangeAdmin)
+        .deploy(nftProxy.address, erc20Proxy.address, fee);
 
     await nftProxy.connect(exchangeAdmin).__TransferProxy_init();
     await erc20Proxy.connect(exchangeAdmin).__ERC20TransferProxy_init();
@@ -41,7 +41,7 @@ describe("WaffleExchange", function () {
     const exchangeFee = await waffleExchange.getExchangeFee();
     expect(fee).to.equal(exchangeFee);
   });
-  it("Should return regsistered order with maker asset & taker asset", async function () {
+  it("Should return registered order with maker asset & taker asset", async function () {
     const testErc721 = await (
       await ethers.getContractFactory("TestERC721")
     ).deploy("testName", "testSymbol");
@@ -108,58 +108,58 @@ describe("WaffleExchange", function () {
   });
   it("Should match order success with correct maker asset and taker asset", async function () {
     const testErc721 = await (
-      await ethers.getContractFactory("TestERC721")
+        await ethers.getContractFactory("TestERC721")
     ).deploy("testName", "testSymbol");
 
     testErc721.mint(orderMaker.address, 7, "");
     testErc721.connect(orderMaker).approve(nftProxy.address, 7);
 
     const testErc20 = await (
-      await ethers.getContractFactory("TestERC20")
+        await ethers.getContractFactory("TestERC20")
     ).deploy("waffleCoin", "waffle");
 
-    testErc20.mint(ordertaker.address, 1000);
-    testErc20.connect(ordertaker).approve(erc20Proxy.address, 10);
+    testErc20.mint(orderTaker.address, 1000);
+    testErc20.connect(orderTaker).approve(erc20Proxy.address, 10);
 
     const makeAsset = asset(ERC721, encodeAbi(testErc721.address, 7), 1);
     const takeAsset = asset(ERC20, encodeAbi(testErc20.address), 10);
 
     await waffleExchange.registerOrder(
-      orderMaker.address,
-      makeAsset,
-      takeAsset
+        orderMaker.address,
+        makeAsset,
+        takeAsset
     );
 
-    await waffleExchange.matchOrder(ordertaker.address, 1, takeAsset);
+    await waffleExchange.matchOrder(orderTaker.address, 1, takeAsset);
   });
   it("Should match order reverted with incorrect maker asset and taker asset", async function () {
     const testErc721 = await (
-      await ethers.getContractFactory("TestERC721")
+        await ethers.getContractFactory("TestERC721")
     ).deploy("testName", "testSymbol");
 
     testErc721.mint(orderMaker.address, 7, "");
     testErc721.connect(orderMaker).approve(nftProxy.address, 7);
 
     const testErc20 = await (
-      await ethers.getContractFactory("TestERC20")
+        await ethers.getContractFactory("TestERC20")
     ).deploy("waffleCoin", "waffle");
 
-    testErc20.mint(ordertaker.address, 1000);
-    testErc20.connect(ordertaker).approve(erc20Proxy.address, 10);
+    testErc20.mint(orderTaker.address, 1000);
+    testErc20.connect(orderTaker).approve(erc20Proxy.address, 10);
 
     const makeAsset = asset(ERC721, encodeAbi(testErc721.address, 7), 1);
     const takeAsset = asset(ERC20, encodeAbi(testErc20.address), 10);
 
     await waffleExchange.registerOrder(
-      orderMaker.address,
-      makeAsset,
-      takeAsset
+        orderMaker.address,
+        makeAsset,
+        takeAsset
     );
 
     const insufficientTakeAsset = asset(ERC20, encodeAbi(testErc20.address), 1);
 
     await expect(
-      waffleExchange.matchOrder(ordertaker.address, 1, insufficientTakeAsset)
+        waffleExchange.matchOrder(orderTaker.address, 1, insufficientTakeAsset)
     ).to.be.revertedWith("takeAsset should match");
   });
   it("Should return proxy addresses once it's initilaized or changed", async function () {
