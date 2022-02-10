@@ -26,6 +26,7 @@
       width: 150px;
       height: 150px;
       transition: 0.2s all;
+      cursor: pointer;
 
       &:hover {
         transform: scale(1.05);
@@ -33,15 +34,7 @@
     }
   }
 }
-.modalButton {
-  cursor: pointer;
-  border-radius: 50%;
-  height: 50px;
-  width: 50px;
 
-  background-color: burlywood;
-  border: 3px solid #b58259;
-}
 .smallButton {
   cursor: pointer;
   border-radius: 10%;
@@ -52,4 +45,8 @@
   bottom: 10px;
   background-color: burlywood;
   border: 3px solid #b58259;
+
+  &:hover {
+    box-shadow: 0 1px 2px $waffle_black;
+  }
 }
