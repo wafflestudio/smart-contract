@@ -67,9 +67,9 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
     ) external virtual override returns (bool) {
         LibOrder.Order memory order = orderOf[id];
         _validateOrder(order, taker, takerAsset);
-        _matchAndTransfer(order);
         order.taker = taker;
         order.status = LibOrder.OrderStatus.completed;
+        _matchAndTransfer(order);
         return true;
     }
 
