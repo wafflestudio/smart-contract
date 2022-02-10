@@ -84,6 +84,27 @@ describe("WaffleExchange", function () {
 
     expect(makeAsset).to.eql(registeredOrderMakerAsset);
     expect(takeAsset).to.eql(registeredOrderTakerAsset);
+
+    const orders = await waffleExchange.getOrders();
+
+    const lastInOrderListMakerAsset = {
+      assetType: {
+        assetClass: orders[orders.length - 1].makerAsset.assetType.assetClass,
+        data: orders[orders.length - 1].makerAsset.assetType.data,
+      },
+      value: orders[orders.length - 1].makerAsset.value.toNumber(),
+    };
+
+    const lastInOrderListTakerAsset = {
+      assetType: {
+        assetClass: orders[orders.length - 1].takerAsset.assetType.assetClass,
+        data: orders[orders.length - 1].takerAsset.assetType.data,
+      },
+      value: orders[orders.length - 1].takerAsset.value.toNumber(),
+    };
+
+    expect(makeAsset).to.eql(lastInOrderListMakerAsset);
+    expect(takeAsset).to.eql(lastInOrderListTakerAsset);
   });
   it("Should match order success with correct maker asset and taker asset", async function () {
     const testErc721 = await (
