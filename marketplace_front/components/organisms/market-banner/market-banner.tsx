@@ -8,7 +8,9 @@ interface Props {
 }
 
 export const MarketBanner = ({ className }: Props) => {
-  return  <Link href={'/market'}>
-            <section className={classNames(className, styles.wrapper)}>마켓 보러가기 {'->'}</section>
-          </Link>
+  return (
+    <Link href={'/market'}>
+      <section className={classNames(className, styles.wrapper)}>마켓 보러가기 {'->'}</section>
+    </Link>
+  );
 };
