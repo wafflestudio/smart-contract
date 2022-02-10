@@ -52,9 +52,9 @@ module.exports = {
     // Useful for deploying to a public network.
     // NB: It's important to wrap the provider as a function.
     ropsten: {
-    provider: () => new HDWalletProvider(mnemonic, 'https://ropsten.infura.io/v3/4896e5a9d9014270bce389c01489b0d7'), // fixme Infura 프로젝트 ID
+    provider: () => new HDWalletProvider(mnemonic, 'https://ropsten.infura.io/v3/YOUR_PRJ_ID'), // fixme Infura 프로젝트 ID
     network_id: 3,       // Ropsten's id
-    gas: 8000000,        // Ropsten has a lower block limit than mainnet
+    gas: 5500000,        // Ropsten has a lower block limit than mainnet
     confirmations: 0,    // # of confs to wait between deployments. (default: 0)
     timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
     skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
@@ -111,6 +111,6 @@ module.exports = {
     'truffle-plugin-verify',
   ],
   api_keys: {
-    etherscan: 'RBD5QGJ1AE7ZCJS4ZCRIGRUC3XERUPIMZ8', // fixme 이더스캔에서 api key 발급
+    etherscan: 'YOUR_API_KEY', // fixme 이더스캔에서 api key 발급
   },
 };
