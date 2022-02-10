@@ -1,6 +1,6 @@
 import { ethers } from 'ethers';
 
-import { marketAbi, marketAddress } from './contracts';
+import { exchangeAbi, exchangeAddress } from './contracts';
 export const provider =
   typeof window !== 'undefined' && 'ethereum' in window
     ? new ethers.providers.Web3Provider(
@@ -12,4 +12,4 @@ export const provider =
       // (i.e. ``http:/\/localhost:8545``)
       new ethers.providers.JsonRpcProvider();
 
-export const marketContract = new ethers.Contract(marketAddress, marketAbi, provider);
+export const marketContract = new ethers.Contract(exchangeAddress, exchangeAbi, provider);
