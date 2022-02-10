@@ -19,6 +19,7 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
     using Counters for Counters.Counter;
     Counters.Counter private _latestOrderId;
 
+    event OrderRegistered(address indexed maker, LibAsset.Asset makerAsset, LibAsset.Asset takerAsset, uint256 id);
     constructor(
         INftTransferProxy nftTransferProxy,
         IERC20TransferProxy erc20TransferProxy,
