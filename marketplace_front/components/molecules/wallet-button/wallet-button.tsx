@@ -30,11 +30,13 @@ export const WalletButton = ({ className }: Props) => {
     }
   };
 
+  if (address === undefined) return null;
+
   return (
     <button
       className={classNames(className, styles.walletButton, address ? styles.connected : styles.disconnected)}
       onClick={onClickWallet}
-      title={address ?? undefined}
+      title={address || undefined}
     >
       <img
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/32px-MetaMask_Fox.svg.png"
