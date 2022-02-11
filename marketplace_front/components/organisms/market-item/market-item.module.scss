@@ -15,29 +15,37 @@
     box-shadow: 0 2px 8px rgba($waffle_black, 0.4);
   }
 
-  .idLabel {
+  .idLabel,
+  .statusLabel,
+  .cancelLabel {
     position: absolute;
-    top: -2px;
-    left: -2px;
     margin: 0;
     height: 40px;
     line-height: 40px;
     padding-inline: 8px;
+    cursor: pointer;
+  }
+
+  .idLabel {
+    top: -2px;
+    left: -2px;
     color: white;
     background-color: $waffle_black;
     border-radius: 16px 0 16px 0;
   }
 
   .statusLabel {
-    position: absolute;
     top: -2px;
     right: -2px;
-    margin: 0;
-    height: 40px;
-    line-height: 40px;
-    padding-inline: 8px;
     background-color: $waffle_pink;
     border-radius: 0 16px 0 16px;
+  }
+
+  .cancelLabel {
+    bottom: -2px;
+    right: -2px;
+    background-color: rgb(240, 79, 79);
+    border-radius: 16px 0 16px 0;
   }
 
   .description {

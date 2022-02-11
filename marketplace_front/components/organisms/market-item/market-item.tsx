@@ -1,3 +1,7 @@
+import toast from 'react-hot-toast';
+
+import { useMetamaskContext } from '../../../contexts/metamaskContext';
+import { marketContract, provider } from '../../../library/ether';
 import { Typography } from '../../atoms';
 import { Order, OrderStatus } from '../../pages/market/market.queries';
 
@@ -8,14 +12,32 @@ interface Props {
 }
 
 export const MarketItem = ({ order }: Props) => {
+  const { address } = useMetamaskContext();
+
+  const cancel = async () => {
+    try {
+      const signer = provider?.getSigner();
+      const daiWithSigner = signer && marketContract.connect(signer);
+      await daiWithSigner.cancelOrder(order.maker, 1);
+      toast.success('취소되었습니다.');
+    } catch (err) {
+      toast.error('오류가 발생했습니다.');
+    }
+  };
+
   return (
-    <article className={styles.wrapper}>
+    <article className={styles.wrapper} onClick={cancel}>
       <Typography className={styles.idLabel} as="label">
         {order.id._hex}
       </Typography>
       <Typography className={styles.statusLabel} as="label">
         {{ [OrderStatus.CANCELED]: '취소', [OrderStatus.COMPLETED]: '완료', [OrderStatus.ON_SALE]: '판매 중' }[order.status]}
       </Typography>
+      {order.maker === address && (
+        <Typography className={styles.cancelLabel} as="label">
+          취소
+        </Typography>
+      )}
       <Typography className={styles.description}>
         <strong>Maker</strong> {order.maker}
       </Typography>
