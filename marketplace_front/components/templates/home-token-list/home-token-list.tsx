@@ -7,6 +7,7 @@ import { useMetamaskContext } from '../../../contexts/metamaskContext';
 import { Typography } from '../../atoms';
 import { TokenInfo } from '../../organisms';
 
+import { buy721, sell721 } from '../../pages/buyAndSell';
 import styles from './home-token-list.module.scss';
 
 export enum Token {
@@ -37,6 +38,8 @@ export const HomeTokenList = ({ className }: Props) => {
   return (
     <>
       <section className={classNames(className, styles.wrapper)}>
+        <button onClick={() => sell721(15, 15)}>SELLTEST</button>
+        <button onClick={() => buy721(1)}>BUYTEST</button>
         <Typography as="h1">내 토큰</Typography>
         <Typography className={styles.description} as="h4">
           {address ? `내 주소: ${address}` : ''}
