@@ -14,3 +14,23 @@
     width: calc(100% - 50px);
   }
 }
+
+.radio {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.mintShapeForm {
+  margin: 0 auto;
+
+  & > label {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+
+    & > input {
+      width: 40px;
+    }
+  }
+}

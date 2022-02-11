@@ -16,14 +16,20 @@
     position: absolute;
     bottom: 32px;
     right: 32px;
+    left: 32px;
+    overflow-x: scroll;
+    overflow-y: hidden;
     display: flex;
-    gap: 20px;
+    flex-wrap: nowrap;
+    gap: 16px;
+    justify-content: right;
 
     .preview {
       background-color: white;
       border: none;
       width: 150px;
       height: 150px;
+      min-width: 150px;
       transition: 0.2s all;
       cursor: pointer;
 
@@ -48,4 +54,12 @@
   position: fixed;
   top: calc(50vh - 200px);
   left: calc(50vw - 350px);
+}
+
+.loader {
+  position: fixed;
+  width: 100px;
+  height: 100px;
+  left: calc(50vw - 50px);
+  top: calc(50vh - 20px);
 }

@@ -1,0 +1,57 @@
+@import 'styles/palette';
+
+.wrapper {
+  border: 2px solid $waffle_brown;
+  border-radius: 16px;
+  padding: 16px 60px;
+  margin-bottom: 24px;
+  height: 200px;
+  background-color: rgba($waffle_brown, 0.2);
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    box-shadow: 0 2px 8px rgba($waffle_black, 0.4);
+  }
+
+  .idLabel {
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    margin: 0;
+    height: 40px;
+    line-height: 40px;
+    padding-inline: 8px;
+    color: white;
+    background-color: $waffle_black;
+    border-radius: 16px 0 16px 0;
+  }
+
+  .statusLabel {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    margin: 0;
+    height: 40px;
+    line-height: 40px;
+    padding-inline: 8px;
+    background-color: $waffle_pink;
+    border-radius: 0 16px 0 16px;
+  }
+
+  .description {
+    width: 100%;
+    word-break: break-all;
+    font-size: 14px;
+    display: flex;
+
+    & > strong {
+      font-size: 16px;
+      width: 100px;
+      min-width: 100px;
+      display: inline-block;
+      margin-right: 16px;
+    }
+  }
+}
