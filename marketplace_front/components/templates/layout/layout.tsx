@@ -2,6 +2,7 @@ import { PropsWithChildren } from 'react';
 
 import classNames from 'classnames';
 import Head from 'next/head';
+import Link from 'next/link';
 
 import { WalletButton } from '../../molecules';
 
@@ -22,7 +23,9 @@ export const Layout = ({ children, title = 'Waffle Marketplace', className }: Pr
       </Head>
 
       <header className={styles.header}>
-        <div className={styles.text}>{title}</div>
+        <Link href="/">
+          <div className={styles.text}>{title}</div>
+        </Link>
         <WalletButton />
       </header>
 
