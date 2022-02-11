@@ -5,6 +5,7 @@ export const convertToKeccak4bytes = (value: string) => {
   return `${ethers.utils.id(value).substring(0, 10)}`;
 };
 
+export const ERC1155 = convertToKeccak4bytes("ERC1155");
 export const ERC721 = convertToKeccak4bytes("ERC721");
 export const ERC20 = convertToKeccak4bytes("ERC20");
 
