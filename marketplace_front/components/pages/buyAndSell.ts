@@ -1,4 +1,5 @@
 import { ethers } from 'ethers';
+import toast from 'react-hot-toast';
 
 import {
   nftProxyAddress,
@@ -31,7 +32,7 @@ export const sell721 = async (price: number | null, token_id: number | null) => 
 
     await waffleExchangeContract.registerOrder(orderMakerAddress, makeAsset, takeAsset); // 최종적으로 전송한다.
   } catch (err) {
-    console.log(err);
+    toast.error('판매 등록에 실패하였습니다.');
   }
 };
 
@@ -51,7 +52,7 @@ export const sell1155 = async (price: number | null, token_id: number | null) =>
 
     await waffleExchangeContract.registerOrder(orderMakerAddress, makeAsset, takeAsset); // 최종적으로 전송한다.
   } catch (err) {
-    console.log(err);
+    toast.error('판매 등록에 실패하였습니다.');
   }
 };
 
@@ -61,7 +62,7 @@ export const buy721 = async (price: number | null, marketplace_id: number | null
     const orderTakerAddress = await signer.getAddress(); // 이용자 주소
 
     const contract20 = new ethers.Contract(erc20Address, erc20Abi, signer); //
-    await contract20.approve(erc20ProxyAddress, 17); //
+    await contract20.app을ove(erc20ProxyAddress, 17); //
 
     const waffleExchangeContract = new ethers.Contract(exchangeAddress, exchangeAbi, signer);
 
@@ -69,6 +70,6 @@ export const buy721 = async (price: number | null, marketplace_id: number | null
 
     await waffleExchangeContract.matchOrder(orderTakerAddress, marketplace_id, takeAsset);
   } catch (err) {
-    console.log(err);
+    toast.error('토큰 구매에 실패하였습니다.');
   }
 };

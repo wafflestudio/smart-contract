@@ -8,8 +8,8 @@ import { Waffle721, Waffle1155, get721Waffles, get1155Waffles } from '../../../l
 import { Typography } from '../../atoms';
 import { WaffleDisplay } from '../../molecules';
 import { TokenInfo } from '../../organisms';
-
 import { buy721, sell721 } from '../../pages/buyAndSell';
+
 import styles from './home-token-list.module.scss';
 
 interface Props {
@@ -48,8 +48,6 @@ export const HomeTokenList = ({ className }: Props) => {
   return (
     <>
       <section className={classNames(className, styles.wrapper)}>
-        <button onClick={() => sell721(17, 15)}>SELLTEST</button>
-        <button onClick={() => buy721(17, 8)}>BUYTEST</button>
         <Typography as="h1">내 토큰</Typography>
         <Typography className={styles.description} as="h4">
           {address ? `내 주소: ${address}` : ''}
@@ -75,7 +73,7 @@ export const HomeTokenList = ({ className }: Props) => {
         className={styles.modalContent}
         onRequestClose={() => setOpenToken(null)}
       >
-        <TokenInfo openToken={openToken} />
+        <TokenInfo openToken={openToken} setOpenToken={setOpenToken} />
       </Modal>
     </>
   );
