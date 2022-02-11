@@ -28,6 +28,11 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react', '@typescript-eslint'],
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
   rules: {
     'import/no-named-as-default': 0,
     'react/prop-types': 'off',
