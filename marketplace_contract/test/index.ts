@@ -193,36 +193,6 @@ describe("WaffleExchange", function () {
         waffleExchange.matchOrder(orderTaker.address, 1, insufficientTakeAsset)
       ).to.be.revertedWith("takeAsset should match");
     });
-    it("Should match order reverted with incorrect maker asset and taker asset", async function () {
-      const testErc721 = await (
-        await ethers.getContractFactory("TestERC721")
-      ).deploy("testName", "testSymbol");
-
-      testErc721.mint(orderMaker.address, 7, "");
-      testErc721.connect(orderMaker).approve(nftProxy.address, 7);
-
-      const testErc20 = await (
-        await ethers.getContractFactory("TestERC20")
-      ).deploy("waffleCoin", "waffle");
-
-      testErc20.mint(orderTaker.address, 1000);
-      testErc20.connect(orderTaker).approve(erc20Proxy.address, 10);
-
-      const makeAsset = asset(ERC721, encodeAbi(testErc721.address, 7), 1);
-      const takeAsset = asset(ERC20, encodeAbi(testErc20.address), 10);
-
-      await waffleExchange.registerOrder(
-        orderMaker.address,
-        makeAsset,
-        takeAsset
-      );
-
-      const insufficientTakeAsset = asset(ERC20, encodeAbi(testErc20.address), 1);
-
-      await expect(
-        waffleExchange.matchOrder(orderTaker.address, 1, insufficientTakeAsset)
-      ).to.be.revertedWith("takeAsset should match");
-    });
     it("Should match order several orders", async function () {
       const testErc721 = await (
         await ethers.getContractFactory("TestERC721")
