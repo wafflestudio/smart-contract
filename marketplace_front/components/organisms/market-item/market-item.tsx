@@ -4,6 +4,7 @@ import { useMetamaskContext } from '../../../contexts/metamaskContext';
 import { marketContract, provider } from '../../../library/ether';
 import { Typography } from '../../atoms';
 import { Order, OrderStatus } from '../../pages/market/market.queries';
+import { buy721 } from '../../pages/buyAndSell';
 
 import styles from './market-item.module.scss';
 
@@ -13,8 +14,6 @@ interface Props {
 
 export const MarketItem = ({ order }: Props) => {
   const { address } = useMetamaskContext();
-  console.log(address);
-  console.log(order.maker);
   const cancel = async () => {
     try {
       const signer = provider?.getSigner();
@@ -54,12 +53,14 @@ export const MarketItem = ({ order }: Props) => {
         <strong>Price</strong>
         {order.takeAsset.value._hex}
       </Typography>
-      {/* <button */}
-      {/* //   className={styles.buyLabel}
-      //   onClick={() => {
-      //     console.log('d');
-      //   }}
-      // /> */}
+      <button
+        className={styles.buyLabel}
+        onClick={() => {
+          buy721(999, 999); // example
+        }}
+      >
+        사기
+      </button>
     </article>
   );
 };
