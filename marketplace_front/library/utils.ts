@@ -44,7 +44,6 @@ export async function get1155Waffles(myAddress: string) {
   const my1155: Waffle1155[] = await Promise.all(
     myList.map(async (t) => {
       const metadata: string = await erc1155Contract.metadataURI(t.id);
-      console.log(metadata);
       const hor: [number, number] = await erc1155Contract.showHorizontals(t.id);
       const ver: [number, number] = await erc1155Contract.showVerticals(t.id);
       return { ...t, hor: [hor[0], hor[1] - hor[0], 8 - hor[1]], ver: [ver[0], ver[1] - ver[0], 8 - ver[1]], metadata };
