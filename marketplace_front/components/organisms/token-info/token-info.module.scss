@@ -1,5 +1,11 @@
 @import 'styles/palette';
 
+.container{
+  display: flex;
+  flex-direction: row;
+  padding: 20px
+}
+
 .smallButton {
   cursor: pointer;
   border-radius: 10%;
