@@ -53,14 +53,25 @@ export const MarketItem = ({ order }: Props) => {
         <strong>Price</strong>
         {order.takeAsset.value._hex}
       </Typography>
-      <button
+      {order.maker?.toLowerCase() !== address?.toLowerCase() && (
+        <Typography
+          className={styles.buyLabel}
+          as="label"
+          onClick={() => {
+            buy721(Number(order.takeAsset.value._hex), Number(order.id));
+          }}
+        >
+          구매
+        </Typography>
+      )}
+      {/* <button
         className={styles.buyLabel}
         onClick={() => {
-          buy721(999, 999); // example
+          buy721(); // example
         }}
       >
-        사기
-      </button>
+        
+      </button> */}
     </article>
   );
 };
