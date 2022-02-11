@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import classNames from 'classnames';
+import toast from 'react-hot-toast';
 
 import { connectWallet } from '../../../library/ether';
 
@@ -15,10 +16,19 @@ export const WalletButton = ({ className }: Props) => {
   const onClickWallet = async () => {
     if (address) {
       setAddress(null);
+      toast.success(`metamask 계정 연결이 해제되었습니다.`);
       return;
     }
-    const walletAddress = await connectWallet();
-    setAddress(walletAddress ?? null);
+
+    try {
+      const walletAddress = await connectWallet();
+      if (!walletAddress) throw Error;
+      setAddress(walletAddress);
+      toast.success(`metamask 계정이 연결되었습니다.`);
+    } catch (err) {
+      toast.error('metamask 에 연결하던 중 오류가 발생했습니다.');
+      setAddress(null);
+    }
   };
 
   return (
