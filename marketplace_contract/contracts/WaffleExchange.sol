@@ -82,8 +82,8 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
     {
         LibOrder.Order memory order = orderOf[id];
         require(
-            order.maker == msg.sender,
-            "message sender should be maker of the order"
+            order.maker == msg.sender || owner() == msg.sender,
+            "message sender should be maker of the order or the contract owner"
         );
         require(order.maker == maker, "maker of the order should match maker");
         require(
@@ -113,7 +113,8 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
         );
         require(
             order.takeAsset.assetType.assetClass ==
-                takeAsset.assetType.assetClass
+                takeAsset.assetType.assetClass,
+            "takeasset should match"
         );
         require(
             keccak256(abi.encodePacked(order.takeAsset.assetType.data)) ==
