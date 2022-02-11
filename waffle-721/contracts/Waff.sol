@@ -95,20 +95,26 @@ contract ERC721Base is HasSecondarySaleFees, HasContractURI, ERC721Enumerable {
  */
 contract ImagedMintableToken is Ownable, ERC721Burnable, ERC721URIStorage, ERC721Base {
 
+    uint256 tokenCount = 0;
+
     struct Image {
         uint256 tokenId;
         string uri;
         bytes data;
     }
+
     mapping(uint256 => Image) public idToImage;
 
     constructor (string memory contractURI, string memory tokenURIPrefix) ERC721Base("Waffle", "WAFF", contractURI, tokenURIPrefix) {
     }
 
-    function mint(uint256 tokenId, string memory imageUri, bytes memory imageData, Fee[] memory _fees, string memory newTokenURI) public {
+    function mint(uint256 tokenId, string memory imageUri, bytes memory imageData, Fee[] memory _fees, string memory newTokenURI) public returns (uint256) {
+        tokenId = tokenCount;
+        tokenCount++;
         idToImage[tokenId] = Image(tokenId, imageUri, imageData);
         _mint(msg.sender, tokenId, _fees);
         _setTokenURI(tokenId, newTokenURI);
+        return tokenId;
     }
 
     function setContractURI(string memory contractURI) public onlyOwner {
