@@ -1,10 +1,4 @@
 export const exchangeAddress = '0x772DC60fE0c93D5D5a71a3160283c81dAd786BBA';
-<<<<<<< HEAD
-
-=======
-export const nftProxyAddress = '0xf5B76024765Bd84917701E740CE4Be434DA5de1A';
-export const erc20ProxyAddress = '0x449845B00eE150EFc3aa89d120FC41dA02017554';
->>>>>>> 2a3e8a9e7b40df678d286507802d2070ae4f362e
 export const exchangeAbi = [
   {
     inputs: [
@@ -363,7 +357,7 @@ export const exchangeAbi = [
     type: 'function',
   },
 ];
-<<<<<<< HEAD
+
 export const nftProxyAddress = '0xf5B76024765Bd84917701E740CE4Be434DA5de1A';
 export const erc20ProxyAddress = '0x449845B00eE150EFc3aa89d120FC41dA02017554';
 
@@ -597,10 +591,6 @@ export const erc1155Abi = [
 
 export const erc721Address = '0x6bf4b681e0ba203e43cc6e4d1c96544358b35fb7';
 export const erc721Abi = [
-=======
-
-export const waffleTokenAbi = [
->>>>>>> 2a3e8a9e7b40df678d286507802d2070ae4f362e
   {
     inputs: [],
     stateMutability: 'nonpayable',
@@ -1001,29 +991,6 @@ export const waffleTokenAbi = [
   {
     inputs: [
       {
-<<<<<<< HEAD
-=======
-        internalType: 'uint8',
-        name: 'tokenId',
-        type: 'uint8',
-      },
-    ],
-    name: 'metadataURI',
-    outputs: [
-      {
-        internalType: 'string',
-        name: '',
-        type: 'string',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-    constant: true,
-  },
-  {
-    inputs: [
-      {
->>>>>>> 2a3e8a9e7b40df678d286507802d2070ae4f362e
         internalType: 'bytes4',
         name: 'interfaceId',
         type: 'bytes4',
@@ -1145,27 +1112,6 @@ export const waffleTokenAbi = [
   {
     inputs: [
       {
-<<<<<<< HEAD
-=======
-        internalType: 'string',
-        name: 'name',
-        type: 'string',
-      },
-      {
-        internalType: 'bytes',
-        name: 'data',
-        type: 'bytes',
-      },
-    ],
-    name: 'claimRandomWaffle',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
->>>>>>> 2a3e8a9e7b40df678d286507802d2070ae4f362e
         internalType: 'uint256',
         name: '',
         type: 'uint256',
