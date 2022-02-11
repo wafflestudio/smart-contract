@@ -19,3 +19,10 @@ export const useAddress = () =>
       enabled: !!provider,
     }
   );
+
+export const buy20 = () => {};
+
+export const buy721 = () => {};
+
+export const sell20 = () => {};
+export const sell721 = () => {};
