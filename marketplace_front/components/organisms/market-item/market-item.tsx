@@ -13,7 +13,8 @@ interface Props {
 
 export const MarketItem = ({ order }: Props) => {
   const { address } = useMetamaskContext();
-
+  console.log(address);
+  console.log(order.maker);
   const cancel = async () => {
     try {
       const signer = provider?.getSigner();
@@ -53,12 +54,12 @@ export const MarketItem = ({ order }: Props) => {
         <strong>Price</strong>
         {order.takeAsset.value._hex}
       </Typography>
-      <button
-        className={styles.buyLabel}
-        onClick={() => {
-          console.log('d');
-        }}
-      />
+      {/* <button */}
+      {/* //   className={styles.buyLabel}
+      //   onClick={() => {
+      //     console.log('d');
+      //   }}
+      // /> */}
     </article>
   );
 };
