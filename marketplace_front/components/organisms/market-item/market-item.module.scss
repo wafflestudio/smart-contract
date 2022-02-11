@@ -17,6 +17,7 @@
 
   .idLabel,
   .statusLabel,
+  .buyLabel,
   .cancelLabel {
     position: absolute;
     margin: 0;
@@ -39,6 +40,13 @@
     right: -2px;
     background-color: $waffle_pink;
     border-radius: 0 16px 0 16px;
+  }
+
+  .buyLabel {
+    bottom: -2px;
+    right: -2px;
+    background-color: rgb(28, 189, 238);
+    border-radius: 16px 0 16px 0;
   }
 
   .cancelLabel {
