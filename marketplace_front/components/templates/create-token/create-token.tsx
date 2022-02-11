@@ -27,7 +27,7 @@ export const CreateToken = () => {
         isOpen={isModalOpen}
         onRequestClose={() => setModalOpen(false)}
       >
-        <CreateTokenModalContent />
+        <CreateTokenModalContent close={() => setModalOpen(false)} />
       </Modal>
     </>
   );

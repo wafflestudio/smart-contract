@@ -1,0 +1,13 @@
+.wrapper {
+  list-style-type: none;
+
+  & > li {
+    & > label {
+      display: flex;
+      font-size: 14px;
+      align-items: center;
+      width: 100px;
+      justify-content: space-between;
+    }
+  }
+}
