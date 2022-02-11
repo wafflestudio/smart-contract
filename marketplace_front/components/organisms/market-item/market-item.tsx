@@ -26,7 +26,7 @@ export const MarketItem = ({ order }: Props) => {
   };
 
   return (
-    <article className={styles.wrapper} onClick={cancel}>
+    <article className={styles.wrapper}>
       <Typography className={styles.idLabel} as="label">
         {order.id._hex}
       </Typography>
@@ -34,7 +34,7 @@ export const MarketItem = ({ order }: Props) => {
         {{ [OrderStatus.CANCELED]: '취소', [OrderStatus.COMPLETED]: '완료', [OrderStatus.ON_SALE]: '판매 중' }[order.status]}
       </Typography>
       {order.maker === address && (
-        <Typography className={styles.cancelLabel} as="label">
+        <Typography className={styles.cancelLabel} as="label" onClick={cancel}>
           취소
         </Typography>
       )}
