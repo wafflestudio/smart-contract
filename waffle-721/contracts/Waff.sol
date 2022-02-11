@@ -95,7 +95,7 @@ contract ERC721Base is HasSecondarySaleFees, HasContractURI, ERC721Enumerable {
  */
 contract ImagedMintableToken is Ownable, ERC721Burnable, ERC721URIStorage, ERC721Base {
 
-    uint256 tokenCount = 0;
+    uint256 public tokenCount = 0;
 
     struct Image {
         uint256 tokenId;
