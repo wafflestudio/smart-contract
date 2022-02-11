@@ -48,8 +48,6 @@ export const HomeTokenList = ({ className }: Props) => {
   return (
     <>
       <section className={classNames(className, styles.wrapper)}>
-        <button onClick={() => sell721(17, 15)}>SELLTEST</button>
-        <button onClick={() => buy721(17, 8)}>BUYTEST</button>
         <Typography as="h1">내 토큰</Typography>
         <Typography className={styles.description} as="h4">
           {address ? `내 주소: ${address}` : ''}
