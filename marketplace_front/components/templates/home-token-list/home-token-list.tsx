@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
 
 import classNames from 'classnames';
-import { MutatingDots } from 'react-loader-spinner';
 import Modal from 'react-modal';
 
 import { useMetamaskContext } from '../../../contexts/metamaskContext';
-import { Waffle721, Waffle1155, get721Waffles, get1155Waffles } from '../../../library/ether';
-import { $waffle_brown, $waffle_pink } from '../../../styles/palette';
+import { Waffle721, Waffle1155, get721Waffles, get1155Waffles } from '../../../library/utils';
 import { Typography } from '../../atoms';
 import { WaffleDisplay } from '../../molecules';
 import { TokenInfo } from '../../organisms';
@@ -24,6 +22,7 @@ export const HomeTokenList = ({ className }: Props) => {
   const [waffles1155, setWaffles1155] = useState<Waffle1155[]>([]);
   const { address } = useMetamaskContext();
 
+  // TODO: react-query 사용해서 loading spinner 보여주기
   useEffect(() => {
     async function fetchList(a?: string | null) {
       if (a) {
