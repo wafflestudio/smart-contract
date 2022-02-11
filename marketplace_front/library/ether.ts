@@ -1,4 +1,5 @@
 import { ethers } from 'ethers';
+import toast from 'react-hot-toast';
 
 import { exchangeAbi, exchangeAddress } from './contracts';
 export const provider =
@@ -13,3 +14,15 @@ export const provider =
       new ethers.providers.JsonRpcProvider();
 
 export const marketContract = new ethers.Contract(exchangeAddress, exchangeAbi, provider);
+
+export const connectWallet = async () => {
+  try {
+    if (!provider) throw Error;
+    const addressList: string[] = await provider.send('eth_requestAccounts', []);
+    if (addressList.length !== 1) throw Error;
+    return addressList[0];
+  } catch {
+    toast.error('Metamask 에 계정이 올바르게 연결되어 있는지 확인해 주세요.');
+    return null;
+  }
+};
