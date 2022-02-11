@@ -1,0 +1,17 @@
+@import 'styles/palette';
+
+.input {
+  height: 30px;
+  width: 100px;
+  border-radius: 2px;
+  border-width: 1px;
+  padding-inline: 8px;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    border: 1px solid $waffle_black;
+  }
+}
