@@ -33,7 +33,7 @@ export const MarketItem = ({ order }: Props) => {
       <Typography className={styles.statusLabel} as="label">
         {{ [OrderStatus.CANCELED]: '취소', [OrderStatus.COMPLETED]: '완료', [OrderStatus.ON_SALE]: '판매 중' }[order.status]}
       </Typography>
-      {order.maker === address && (
+      {order.maker?.toLowerCase() === address?.toLowerCase() && (
         <Typography className={styles.cancelLabel} as="label" onClick={cancel}>
           취소
         </Typography>
