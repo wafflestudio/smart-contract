@@ -18,9 +18,10 @@ export const MarketItem = ({ order }: Props) => {
     try {
       const signer = provider?.getSigner();
       const daiWithSigner = signer && marketContract.connect(signer);
-      await daiWithSigner.cancelOrder(order.maker, 1);
+      await daiWithSigner.cancelOrder(order.maker, order.id);
       toast.success('취소되었습니다.');
     } catch (err) {
+      console.log(err);
       toast.error('오류가 발생했습니다.');
     }
   };
