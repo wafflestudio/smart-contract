@@ -1,7 +1,7 @@
 import { ethers } from 'ethers';
 import toast from 'react-hot-toast';
 
-import { exchangeAbi, exchangeAddress } from './contracts';
+import { erc1155Abi, erc1155Address, erc721Abi, erc721Address, exchangeAbi, exchangeAddress } from './contracts';
 export const provider =
   typeof window !== 'undefined' && 'ethereum' in window
     ? new ethers.providers.Web3Provider(
@@ -14,7 +14,8 @@ export const provider =
       new ethers.providers.JsonRpcProvider();
 
 export const marketContract = new ethers.Contract(exchangeAddress, exchangeAbi, provider);
-
+export const erc721Waffle = new ethers.Contract(erc721Address, erc721Abi, provider);
+export const erc1155Waffle = new ethers.Contract(erc1155Address, erc1155Abi, provider);
 export const connectWallet = async () => {
   try {
     if (!provider) throw Error;
