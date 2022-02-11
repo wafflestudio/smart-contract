@@ -1,0 +1,43 @@
+@import 'styles/palette';
+
+.walletButton {
+    color: $waffle_black;
+    cursor: pointer;
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    position: relative;
+    transition: all 0.5s;
+    background-color: white;
+
+    p {
+        position: relative;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 2;
+        vertical-align: middle;
+        font-weight: bold;
+    }
+}
+
+.connected {
+  display: flex;
+  img{
+    padding: 5px
+  }
+}
+
+
+@keyframes gradient {
+  0% {
+    background-position: 0 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0 50%;
+  }
+}

@@ -3,6 +3,8 @@ import { PropsWithChildren } from 'react';
 import classNames from 'classnames';
 import Head from 'next/head';
 
+import { WalletButton } from '../../molecules';
+
 import styles from './layout.module.scss';
 
 interface Props {
@@ -10,7 +12,7 @@ interface Props {
   className?: string;
 }
 
-export const Layout = ({ children, title = 'Waffle Token Marketplace', className }: PropsWithChildren<Props>) => {
+export const Layout = ({ children, title = 'Waffle Marketplace', className }: PropsWithChildren<Props>) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -19,7 +21,10 @@ export const Layout = ({ children, title = 'Waffle Token Marketplace', className
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header className={styles.header}>{title}</header>
+      <header className={styles.header}>
+        <div className={styles.text}>{title}</div>
+        <WalletButton />
+      </header>
 
       <main className={classNames(className, styles.main)}>{children}</main>
 

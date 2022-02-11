@@ -357,3 +357,5 @@ export const exchangeAbi = [
     type: 'function',
   },
 ];
+export const nftProxyAddress = '0xf5B76024765Bd84917701E740CE4Be434DA5de1A';
+export const erc20ProxyAddress = '0x449845B00eE150EFc3aa89d120FC41dA02017554';
