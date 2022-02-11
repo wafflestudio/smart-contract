@@ -6,7 +6,9 @@
     "deploy:ropsten": "hardhat run --network ropsten scripts/deploy.ts",
     "deploy:mainnet": "hardhat run --network mainnet scripts/deploy.ts",
     "deploy:local": "hardhat run --network localhost scripts/deploy.ts",
-    "get-accounts": "hardhat accounts"
+    "get-accounts": "hardhat accounts",
+    "verify:ropsten": "npx hardhat verify --network ropsten",
+    "verify:mainnet": "npx hardhat verify --network mainnet"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.4",
