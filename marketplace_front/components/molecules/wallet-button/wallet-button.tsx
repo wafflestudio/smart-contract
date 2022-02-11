@@ -22,20 +22,15 @@ export const WalletButton = ({ className }: Props) => {
   };
 
   return (
-    <button className={classNames(className, styles.walletButton)} onClick={() => onClickWallet()}>
-      {address ? (
-        <div className={styles.connected}>
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/32px-MetaMask_Fox.svg.png"
-            alt="metamask"
-          />
-          <p>연결됨</p>
-        </div>
-      ) : (
-        <div>
-          <p>연결되지 않음</p>
-        </div>
-      )}
+    <button
+      className={classNames(className, styles.walletButton, address ? styles.connected : styles.disconnected)}
+      onClick={() => onClickWallet()}
+    >
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/32px-MetaMask_Fox.svg.png"
+        alt="metamask"
+      />
+      <span>{address ? '연결됨' : '연결되지 않음'}</span>
     </button>
   );
 };
