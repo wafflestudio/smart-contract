@@ -1,6 +1,5 @@
 import toast from 'react-hot-toast';
 import { useQuery } from 'react-query';
-
 import { provider } from '../../../library/ether';
 
 export const useAddress = () =>
@@ -19,10 +18,3 @@ export const useAddress = () =>
       enabled: !!provider,
     }
   );
-
-export const buy20 = () => {};
-
-export const buy721 = () => {};
-
-export const sell20 = () => {};
-export const sell721 = () => {};

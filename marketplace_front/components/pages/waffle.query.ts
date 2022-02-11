@@ -1,8 +1,9 @@
 import { ethers, Contract } from 'ethers';
-import { nftProxyAddress, waffleTokenAbi, exchangeAddress, exchangeAbi } from '../../library/contracts'; // 각종 address 주소와 abi는 여기에 넣어놨습니다.
-import { asset, encodeAbi, ERC721, ERC20 } from '../../library/util'; // 각종 utils
-import { provider } from '../../library/ether';
 import { useQuery } from 'react-query';
+
+import { nftProxyAddress, waffleTokenAbi, exchangeAddress, exchangeAbi } from '../../library/contracts'; // 각종 address 주소와 abi는 여기에 넣어놨습니다.
+import { provider } from '../../library/ether';
+import { asset, encodeAbi, ERC721, ERC20 } from '../../library/util'; // 각종 utils
 
 export const sell721 = (erc20ContractAddress: string | null, erc721ContractAddress: string | null, price: number | null) => {
   return useQuery([], async () => {
@@ -18,8 +19,3 @@ export const sell721 = (erc20ContractAddress: string | null, erc721ContractAddre
     await waffleExchangeContract.registerOrder(orderMakerAddress, makeAsset, takeAsset); // 최종적으로 전송한다.
   });
 };
-
-export const buy721 = () {
-  
-}
-// export const sell721 = () => {};
