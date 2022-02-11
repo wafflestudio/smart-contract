@@ -34,12 +34,13 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
         LibAsset.Asset calldata makeAsset,
         LibAsset.Asset calldata takeAsset
     ) external virtual override returns (uint256) {
-        _latestOrderId.increment();
-        uint256 id = _latestOrderId.current();
         require(
             _getBalance(maker, makeAsset) >= makeAsset.value,
             "maker should have enough asset"
         );
+        
+        _latestOrderId.increment();
+        uint256 id = _latestOrderId.current();
 
         {
             LibOrder.Order memory newOrder = LibOrder.Order(
