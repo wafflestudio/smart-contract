@@ -4,6 +4,8 @@ import { Toaster } from 'react-hot-toast';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
+import { MetamaskProvider } from '../contexts/metamaskContext';
+
 const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: false, refetchOnWindowFocus: false } },
 });
@@ -11,8 +13,10 @@ const queryClient = new QueryClient({
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <Component {...pageProps} /> <Toaster />
-      <ReactQueryDevtools />
+      <MetamaskProvider>
+        <Component {...pageProps} /> <Toaster />
+        <ReactQueryDevtools />
+      </MetamaskProvider>
     </QueryClientProvider>
   );
 }
