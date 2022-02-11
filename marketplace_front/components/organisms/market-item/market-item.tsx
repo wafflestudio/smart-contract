@@ -53,6 +53,12 @@ export const MarketItem = ({ order }: Props) => {
         <strong>Price</strong>
         {order.takeAsset.value._hex}
       </Typography>
+      <button
+        className={styles.buyLabel}
+        onClick={() => {
+          console.log('d');
+        }}
+      />
     </article>
   );
 };

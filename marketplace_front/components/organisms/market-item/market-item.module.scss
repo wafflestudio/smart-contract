@@ -17,6 +17,7 @@
 
   .idLabel,
   .statusLabel,
+  // .buyLabel,
   .cancelLabel {
     position: absolute;
     margin: 0;
@@ -41,16 +42,17 @@
     border-radius: 0 16px 0 16px;
   }
 
-  .buyLabel {
-    bottom: -2px;
-    right: -2px;
-    margin: 0;
-    height: 40px;
-    line-height: 40px;
-    padding-inline: 8px;
-    background-color: $waffle_pink;
-    border-radius: 16px 16px 16px 16px;
-  }
+  // .buyLabel {
+  //   bottom: -2px;
+  //   right: -2px;
+  //   margin: 0;
+  //   height: 40px;
+  //   line-height: 40px;
+  //   padding-inline: 8px;
+  //   background-color: $waffle_pink;
+  //   border-radius: 16px 0 16px 0;
+  // }
+
   .cancelLabel {
     bottom: -2px;
     right: -2px;
