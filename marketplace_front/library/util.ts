@@ -2,7 +2,7 @@ import { ethers } from 'ethers';
 import { AbiCoder } from 'ethers/lib/utils';
 
 export const convertToKeccak4bytes = (value: string) => {
-  return `${ethers.utils.id(value).substring(0, 10)}`;
+  return ethers.utils.id(value).substring(0, 10);
 };
 
 export const ERC721 = convertToKeccak4bytes('ERC721');
