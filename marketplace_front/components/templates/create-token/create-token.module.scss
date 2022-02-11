@@ -44,3 +44,15 @@
     top: 32px;
   }
 }
+
+.modal {
+  position: fixed;
+  width: 400px;
+  height: 200px;
+  top: calc(50vh - 100px);
+  left: calc(50vw - 200px);
+  background-color: white;
+  padding: 8px 24px;
+  border-radius: 8px;
+  border: 2px solid $waffle_brown;
+}

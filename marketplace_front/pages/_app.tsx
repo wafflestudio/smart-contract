@@ -1,6 +1,7 @@
 import '../styles/globals.scss';
 import type { AppProps } from 'next/app';
 import { Toaster } from 'react-hot-toast';
+import ReactModal from 'react-modal';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
@@ -22,3 +23,5 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 export default MyApp;
+
+ReactModal.setAppElement('#__next');

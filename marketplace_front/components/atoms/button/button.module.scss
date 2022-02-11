@@ -1,0 +1,14 @@
+@import 'styles/palette';
+
+.button {
+  background-color: transparent;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+  padding: 6px 14px;
+  font-size: 14px;
+
+  &:hover {
+    background-color: rgba($waffle_brown, 0.4);
+  }
+}
