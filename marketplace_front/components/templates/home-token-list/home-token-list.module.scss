@@ -19,17 +19,18 @@
     left: 32px;
     overflow-x: scroll;
     overflow-y: hidden;
-    white-space: nowrap;
-    text-align: right;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 16px;
+    justify-content: right;
 
     .preview {
       background-color: white;
-      display: inline-grid;
       border: none;
       width: 150px;
       height: 150px;
+      min-width: 150px;
       transition: 0.2s all;
-      margin: 0 8px;
       cursor: pointer;
 
       &:hover {
