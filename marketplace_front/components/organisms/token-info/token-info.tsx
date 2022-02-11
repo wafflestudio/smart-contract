@@ -1,4 +1,4 @@
-import { Waffle1155, Waffle721 } from '../../../library/ether';
+import { Waffle1155, Waffle721 } from '../../../library/utils';
 import { Typography } from '../../atoms';
 
 import styles from './token-info.module.scss';
