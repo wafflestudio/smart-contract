@@ -21,7 +21,6 @@ export const MarketItem = ({ order }: Props) => {
       await daiWithSigner.cancelOrder(order.maker, order.id);
       toast.success('취소되었습니다.');
     } catch (err) {
-      console.log(err);
       toast.error('오류가 발생했습니다.');
     }
   };
