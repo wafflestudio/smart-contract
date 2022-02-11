@@ -49,3 +49,11 @@
   top: calc(50vh - 200px);
   left: calc(50vw - 350px);
 }
+
+.loader {
+  position: fixed;
+  width: 100px;
+  height: 100px;
+  left: calc(50vw - 50px);
+  top: calc(50vh - 20px);
+}

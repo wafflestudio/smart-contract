@@ -1,28 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import classNames from 'classnames';
+import { MutatingDots } from 'react-loader-spinner';
 import Modal from 'react-modal';
 
 import { useMetamaskContext } from '../../../contexts/metamaskContext';
+import { Waffle721, Waffle1155, get721Waffles, get1155Waffles } from '../../../library/ether';
+import { $waffle_brown, $waffle_pink } from '../../../styles/palette';
 import { Typography } from '../../atoms';
+import { WaffleDisplay } from '../../molecules';
 import { TokenInfo } from '../../organisms';
 
 import styles from './home-token-list.module.scss';
-
-export enum Token {
-  GITHUB = 'Github',
-  GITLAB = 'Gitlab',
-  BITBUCKET = 'Bitbucket',
-}
-
-const tokenData = [
-  { token: Token.GITHUB, src: 'https://cdn-icons-png.flaticon.com/512/25/25231.png' },
-  { token: Token.GITLAB, src: 'https://cdn.worldvectorlogo.com/logos/gitlab.svg' },
-  {
-    token: Token.BITBUCKET,
-    src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Bitbucket-blue-logomark-only.svg/1200px-Bitbucket-blue-logomark-only.svg.png',
-  },
-];
 
 interface Props {
   className?: string;
@@ -30,9 +19,31 @@ interface Props {
 }
 
 export const HomeTokenList = ({ className }: Props) => {
-  const [openToken, setOpenToken] = useState<Token | null>(null);
-
+  const [openToken, setOpenToken] = useState<Waffle721 | Waffle1155 | null>(null);
+  const [waffles721, setWaffles721] = useState<Waffle721[]>([]);
+  const [waffles1155, setWaffles1155] = useState<Waffle1155[]>([]);
   const { address } = useMetamaskContext();
+
+  useEffect(() => {
+    async function fetchList(a?: string | null) {
+      if (a) {
+        const w721: Waffle721[] = await get721Waffles(a);
+        const w1155: Waffle1155[] = await get1155Waffles(a);
+        setWaffles721(w721);
+        setWaffles1155(w1155);
+      } else {
+        setWaffles721([]);
+        setWaffles1155([]);
+      }
+    }
+    if (address) {
+      fetchList(address);
+    }
+    if (!address) {
+      setWaffles721([]);
+      setWaffles1155([]);
+    }
+  }, [address]);
 
   return (
     <>
@@ -42,8 +53,17 @@ export const HomeTokenList = ({ className }: Props) => {
           {address ? `내 주소: ${address}` : ''}
         </Typography>
         <div className={styles.previewList}>
-          {tokenData.map(({ token, src }) => (
-            <img key={token} className={styles.preview} src={src} alt={token} onClick={() => setOpenToken(token)} />
+          {/* 721Tokens */}
+          {waffles721.map((token) => (
+            <WaffleDisplay className={styles.preview} key={`waffle721-${token.id}`} token={token} setOpenToken={setOpenToken} />
+          ))}
+          {waffles1155.map((token) => (
+            <div
+              className={styles.preview}
+              dangerouslySetInnerHTML={{ __html: atob(token.metadata.substring(29)).split('"svg" : "')[1].slice(0, -2) }}
+              key={`waffle1155-${token.id}`}
+              onClick={() => setOpenToken(token)}
+            />
           ))}
         </div>
       </section>
