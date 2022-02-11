@@ -16,7 +16,7 @@ export function Market() {
       <Typography as="h1">마켓</Typography>
       <ul className={styles.list}>
         {data?.map((order) => (
-          <li key={order.id._hex}>
+          <li key={order.id?._hex}>
             <MarketItem order={order} />
           </li>
         ))}

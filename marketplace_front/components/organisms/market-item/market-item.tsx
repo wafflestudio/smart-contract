@@ -51,7 +51,7 @@ export const MarketItem = ({ order }: Props) => {
       </Typography>
       <Typography className={styles.description}>
         <strong>Price</strong>
-        {order.takeAsset.value._hex}
+        {order.takeAsset.value?._hex}
       </Typography>
       {order.maker?.toLowerCase() !== address?.toLowerCase() && (
         <Typography
