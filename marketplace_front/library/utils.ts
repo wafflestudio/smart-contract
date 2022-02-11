@@ -1,6 +1,8 @@
+import { ethers } from 'ethers';
+import { AbiCoder } from 'ethers/lib/utils';
+
 import { erc1155Contract, erc721Contract } from './ether';
 import { Flavor } from './flavor';
-
 export interface Token {
   flavor: Flavor;
   name: string;
@@ -14,6 +16,33 @@ export interface Waffle721 extends Token {
 export interface Waffle1155 extends Waffle721 {
   metadata: string;
 }
+
+export const convertToKeccak4bytes = (value: string) => {
+  return ethers.utils.id(value).substring(0, 10);
+};
+
+export const ERC721 = convertToKeccak4bytes('ERC721');
+export const ERC20 = convertToKeccak4bytes('ERC20');
+export const ERC1155 = convertToKeccak4bytes('ERC1155');
+
+export const asset = (assetClass: string, assetData: string, value: number) => {
+  return {
+    assetType: {
+      assetClass: assetClass,
+      data: assetData,
+    },
+    value: value,
+  };
+};
+
+export const encodeAbi = (tokenAddress: string, tokenId?: number) => {
+  const abiCoder = new AbiCoder();
+  if (tokenId) {
+    return abiCoder.encode(['address', 'uint256'], [tokenAddress, tokenId]);
+  } else {
+    return abiCoder.encode(['address'], [tokenAddress]);
+  }
+};
 
 export async function get1155Waffles(myAddress: string) {
   const result = await Promise.all(
