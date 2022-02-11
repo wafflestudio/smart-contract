@@ -8,7 +8,6 @@ interface Props {
 }
 
 export const MarketItem = ({ order }: Props) => {
-  console.log(order);
   return (
     <article className={styles.wrapper}>
       <Typography className={styles.idLabel} as="label">
