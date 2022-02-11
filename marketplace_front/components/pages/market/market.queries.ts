@@ -1,3 +1,4 @@
+import { BigNumber } from 'ethers';
 import { useQuery } from 'react-query';
 
 import { marketContract } from '../../../library/ether';
@@ -9,21 +10,21 @@ export enum OrderStatus {
 }
 
 interface AssetType {
-  assetClass: unknown; // TODO:
-  data: unknown; // TODO:
+  assetClass: string;
+  data: string;
 }
 
 interface Asset {
-  value: number;
+  value: BigNumber;
   assetType: AssetType;
 }
 
-interface Order {
+export interface Order {
   maker: string;
   makeAsset: Asset;
   taker: string;
   takeAsset: Asset;
-  id: number;
+  id: BigNumber;
   status: OrderStatus;
 }
 
