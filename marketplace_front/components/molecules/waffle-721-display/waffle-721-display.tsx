@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 
-import { Waffle1155, Waffle721 } from '../../../library/ether';
 import { FLAVOR_COLOR_MAP } from '../../../library/flavor';
+import { Waffle1155, Waffle721 } from '../../../library/utils';
 
 import styles from './waffle-721-display.module.scss';
 
