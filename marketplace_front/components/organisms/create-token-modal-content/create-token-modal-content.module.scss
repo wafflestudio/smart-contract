@@ -1,0 +1,16 @@
+.button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.input {
+  margin: 30px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & > input {
+    width: calc(100% - 50px);
+  }
+}
