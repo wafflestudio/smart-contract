@@ -23,7 +23,19 @@ export const WalletButton = ({ className }: Props) => {
 
   return (
     <button className={classNames(className, styles.walletButton)} onClick={() => onClickWallet()}>
-      {address ? <p>{address}</p> : <p>+ wallet</p>}
+      {address ? (
+        <div className={styles.connected}>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/32px-MetaMask_Fox.svg.png"
+            alt="metamask"
+          />
+          <p>연결됨</p>
+        </div>
+      ) : (
+        <div>
+          <p>연결되지 않음</p>
+        </div>
+      )}
     </button>
   );
 };
