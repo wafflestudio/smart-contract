@@ -143,6 +143,13 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
                 (order.takeAsset.value / exchangeFeeDenominator)
         );
         transfer(makerReceivingAsset, order.taker, order.maker);
+        
+        LibAsset.Asset memory ownerReceivingAsset = LibAsset.Asset(
+            order.takeAsset.assetType,
+            (order.takeAsset.value / exchangeFeeDenominator)
+        );
+        transfer(ownerReceivingAsset, order.taker, owner());
+
     }
 
     function _getBalance(address account, LibAsset.Asset memory asset)
