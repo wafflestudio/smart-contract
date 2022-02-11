@@ -3,13 +3,13 @@ import toast from 'react-hot-toast';
 import { useMetamaskContext } from '../../../contexts/metamaskContext';
 import { marketContract, provider } from '../../../library/ether';
 import { Typography } from '../../atoms';
-import { Order, OrderStatus } from '../../pages/market/market.queries';
 import { buy721 } from '../../pages/buyAndSell';
+import { Order, OrderStatus } from '../../pages/market/market.queries';
 
 import styles from './market-item.module.scss';
 
 interface Props {
-  order: Order;
+  order: Partial<Order>;
 }
 
 export const MarketItem = ({ order }: Props) => {
@@ -31,7 +31,8 @@ export const MarketItem = ({ order }: Props) => {
         {order.id?._hex}
       </Typography>
       <Typography className={styles.statusLabel} as="label">
-        {{ [OrderStatus.CANCELED]: '취소', [OrderStatus.COMPLETED]: '완료', [OrderStatus.ON_SALE]: '판매 중' }[order.status]}
+        {order.status &&
+          { [OrderStatus.CANCELED]: '취소', [OrderStatus.COMPLETED]: '완료', [OrderStatus.ON_SALE]: '판매 중' }[order.status]}
       </Typography>
       {order.maker?.toLowerCase() === address?.toLowerCase() && (
         <Typography className={styles.cancelLabel} as="label" onClick={cancel}>
@@ -43,22 +44,22 @@ export const MarketItem = ({ order }: Props) => {
       </Typography>
       <Typography className={styles.description}>
         <strong>Asset class</strong>
-        {order.makeAsset.assetType.assetClass}
+        {order.makeAsset?.assetType.assetClass}
       </Typography>
       <Typography className={styles.description}>
         <strong>Asset data</strong>
-        {order.makeAsset.assetType.data}
+        {order.makeAsset?.assetType.data}
       </Typography>
       <Typography className={styles.description}>
         <strong>Price</strong>
-        {order.takeAsset.value?._hex}
+        {order.takeAsset?.value?._hex}
       </Typography>
       {order.maker?.toLowerCase() !== address?.toLowerCase() && (
         <Typography
           className={styles.buyLabel}
           as="label"
           onClick={() => {
-            buy721(Number(order.takeAsset.value._hex), Number(order.id));
+            buy721(Number(order.takeAsset?.value?._hex), Number(order.id));
           }}
         >
           구매

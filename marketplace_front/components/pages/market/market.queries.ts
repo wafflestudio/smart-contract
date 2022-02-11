@@ -29,7 +29,7 @@ export interface Order {
 }
 
 const fetchOrder = async () => {
-  const orders: Order[] = await marketContract?.getOrders();
+  const orders: Partial<Order>[] = await marketContract?.getOrders();
   return orders;
 };
 
