@@ -3,6 +3,7 @@ import { useState } from 'react';
 import classNames from 'classnames';
 import Modal from 'react-modal';
 
+import { useMetamaskContext } from '../../../contexts/metamaskContext';
 import { Typography } from '../../atoms';
 import { TokenInfo } from '../../organisms';
 
@@ -31,13 +32,14 @@ interface Props {
 export const HomeTokenList = ({ className }: Props) => {
   const [openToken, setOpenToken] = useState<Token | null>(null);
 
+  const { address } = useMetamaskContext();
+
   return (
     <>
       <section className={classNames(className, styles.wrapper)}>
         <Typography as="h1">내 토큰</Typography>
-        <Typography className={styles.description}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-          aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        <Typography className={styles.description} as="h4">
+          {address ? `내 주소: ${address}` : ''}
         </Typography>
         <div className={styles.previewList}>
           {tokenData.map(({ token, src }) => (
