@@ -8,7 +8,6 @@ import { Waffle721, Waffle1155, get721Waffles, get1155Waffles } from '../../../l
 import { Typography } from '../../atoms';
 import { WaffleDisplay } from '../../molecules';
 import { TokenInfo } from '../../organisms';
-import { buy721, sell721 } from '../../pages/buyAndSell';
 
 import styles from './home-token-list.module.scss';
 

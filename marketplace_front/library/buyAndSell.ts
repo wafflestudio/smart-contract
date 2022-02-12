@@ -12,9 +12,9 @@ import {
   erc20Address,
   erc20Abi,
   erc20ProxyAddress,
-} from '../../library/contracts'; // 각종 address 주소와 abi는 여기에 넣어놨습니다.
-import { provider } from '../../library/ether';
-import { asset, encodeAbi, ERC721, ERC20, ERC1155 } from '../../library/utils'; // 각종 utils
+} from './contracts'; // 각종 address 주소와 abi는 여기에 넣어놨습니다.
+import { provider } from './ether';
+import { asset, encodeAbi, ERC721, ERC20, ERC1155 } from './utils'; // 각종 utils
 
 export const sell721 = async (price: number | null, token_id: number | null) => {
   try {

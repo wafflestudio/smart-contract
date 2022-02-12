@@ -1,9 +1,9 @@
 import toast from 'react-hot-toast';
 
 import { useMetamaskContext } from '../../../contexts/metamaskContext';
+import { buy721 } from '../../../library/buyAndSell';
 import { marketContract, provider } from '../../../library/ether';
 import { Typography } from '../../atoms';
-import { buy721 } from '../../pages/buyAndSell';
 import { Order, OrderStatus } from '../../pages/market/market.queries';
 
 import styles from './market-item.module.scss';

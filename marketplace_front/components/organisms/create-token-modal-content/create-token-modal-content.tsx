@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 
 import { provider, erc721Contract, erc1155Contract } from '../../../library/ether';
 import { Typography, Input, Button } from '../../atoms';
-import { Radio } from '../../molecules/radio/radio';
+import { Radio } from '../../molecules';
 
 import styles from './create-token-modal-content.module.scss';
 

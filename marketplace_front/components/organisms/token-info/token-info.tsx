@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react';
 
+import { sell721, sell1155 } from '../../../library/buyAndSell';
 import { Waffle1155, Waffle721 } from '../../../library/utils';
 import { NumberInput, Typography } from '../../atoms';
-import { sell721, sell1155 } from '../../pages/buyAndSell';
 
 import styles from './token-info.module.scss';
 
