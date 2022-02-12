@@ -69,7 +69,7 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
         _validateOrder(order, taker, takeAsset);
         order.taker = taker;
         order.status = LibOrder.OrderStatus.completed;
-        orderOf[id].status = LibOrder.OrderStatus.completed;
+        orderOf[id].order = order;
         _matchAndTransfer(order);
         return true;
     }
