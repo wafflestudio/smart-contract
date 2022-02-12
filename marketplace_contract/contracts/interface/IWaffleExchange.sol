@@ -34,13 +34,12 @@ abstract contract IWaffleExchange {
      * @param taker taker address
      * @param id Order Id
      * @param takeAsset taker asset
-     * @return 구매 성공 여부
      */
     function matchOrder(
         address taker,
         uint256 id,
         LibAsset.Asset calldata takeAsset
-    ) external virtual returns (bool);
+    ) external virtual;
 
     // {
     //     Order order = orders[id]
@@ -50,10 +49,9 @@ abstract contract IWaffleExchange {
 
     /**
      * @dev 등록된 NFT 취소
-     * @return 취소 성공 여부
      */
     function cancelOrder(address maker, uint256 id)
         external
         virtual
-        returns (bool);
+        ;
 }

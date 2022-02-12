@@ -65,20 +65,18 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
         address taker,
         uint256 id,
         LibAsset.Asset calldata takeAsset
-    ) external virtual override returns (bool) {
+    ) external virtual override {
         LibOrder.Order memory order = orderOf[id];
         _validateOrder(order, taker, takeAsset);
         order.taker = taker;
         order.status = LibOrder.OrderStatus.completed;
         _matchAndTransfer(order);
-        return true;
     }
 
     function cancelOrder(address maker, uint256 id)
         external
         virtual
         override
-        returns (bool)
     {
         LibOrder.Order memory order = orderOf[id];
         require(
@@ -91,7 +89,7 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
             "the order should be on sale"
         );
         order.status = LibOrder.OrderStatus.completed;
-        return true;
+        orderOf[id] = order;
     }
 
     function _validateOrder(
