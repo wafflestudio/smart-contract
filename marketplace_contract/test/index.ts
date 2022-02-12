@@ -160,8 +160,16 @@ describe("WaffleExchange", function () {
         makeAsset,
         takeAsset
       );
-  
+        
+      const before_orders = await waffleExchange.getOrders();
+
+      expect(before_orders.length).to.eql(1);
+
       await waffleExchange.matchOrder(orderTaker.address, 1, takeAsset);
+
+      const after_orders = await waffleExchange.getOrders();
+  
+      expect(after_orders.length).to.eql(0);
     });
     it("Should match order reverted with incorrect maker asset and taker asset", async function () {
       const testErc721 = await (
@@ -297,8 +305,16 @@ describe("WaffleExchange", function () {
         makeAsset,
         takeAsset
       );
-  
+        
+      const before_orders = await waffleExchange.getOrders();
+
+      expect(before_orders.length).to.eql(1);
+
       await waffleExchange.connect(orderMaker).cancelOrder(orderMaker.address, 1);
+
+      const after_orders = await waffleExchange.getOrders();
+  
+      expect(after_orders.length).to.eql(0);
     });
     it("Should cancel order fail with incorrect sender", async function(){
       const testErc721 = await (
