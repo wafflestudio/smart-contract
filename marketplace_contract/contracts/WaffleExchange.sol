@@ -52,7 +52,6 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
                     LibOrder.OrderStatus.onSale
                 );
 
-            orders.push(newOrder);
             orderOf[id] = newOrder;
             orderByMaker[maker] = newOrder;
         }
@@ -70,6 +69,7 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
         _validateOrder(order, taker, takeAsset);
         order.taker = taker;
         order.status = LibOrder.OrderStatus.completed;
+        orderOf[id].status = LibOrder.OrderStatus.completed;
         _matchAndTransfer(order);
         return true;
     }
@@ -90,7 +90,8 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
             order.status == LibOrder.OrderStatus.onSale,
             "the order should be on sale"
         );
-        order.status = LibOrder.OrderStatus.completed;
+
+        orderOf[id].status = LibOrder.OrderStatus.canceled;
         return true;
     }
 
@@ -181,6 +182,29 @@ contract WaffleExchange is WaffleExchangeProxyHandler, IWaffleExchange {
     }
 
     function getOrders() external view returns (LibOrder.Order[] memory) {
+        
+
+        uint orders_num = _latestOrderId.current();
+        uint counter = 0;
+        uint tot = 0;
+
+        for(uint i=1; i<=orders_num; i++){
+            LibOrder.Order memory cur_order = orderOf[i];
+            if(cur_order.status == LibOrder.OrderStatus.onSale){
+                tot++;
+            }
+        }
+
+        LibOrder.Order[] memory orders = new LibOrder.Order[] (tot);
+
+        for(uint i=1; i<=orders_num; i++){
+            LibOrder.Order memory cur_order = orderOf[i];
+            if(cur_order.status == LibOrder.OrderStatus.onSale){
+                orders[counter] = cur_order;
+                counter++;
+            }
+        }
+        
         return orders;
     }
 }

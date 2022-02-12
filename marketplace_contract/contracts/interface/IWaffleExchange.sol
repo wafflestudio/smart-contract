@@ -5,7 +5,6 @@ import "../util/LibAsset.sol";
 import "../util/LibOrder.sol";
 
 abstract contract IWaffleExchange {
-    LibOrder.Order[] orders;
     mapping(uint256 => LibOrder.Order) public orderOf;
     mapping(address => LibOrder.Order) public orderByMaker;
 
