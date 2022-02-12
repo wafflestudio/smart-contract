@@ -1,4 +1,4 @@
-export const exchangeAddress = '0x772DC60fE0c93D5D5a71a3160283c81dAd786BBA';
+export const exchangeAddress = '0xf8ffBc62BBe8CB3C1a4a393b45Bc73Dd6e206214';
 export const exchangeAbi = [
   {
     inputs: [
@@ -358,8 +358,8 @@ export const exchangeAbi = [
   },
 ];
 
-export const nftProxyAddress = '0xf5B76024765Bd84917701E740CE4Be434DA5de1A';
-export const erc20ProxyAddress = '0x449845B00eE150EFc3aa89d120FC41dA02017554';
+export const nftProxyAddress = '0x5A1F8Cb0cF0A05980365dc436ddE870DFC4616Af';
+export const erc20ProxyAddress = '0x693715fa0aa22110F7D2824F032207F957A47708';
 
 export const erc1155Address = '0x19C08EbbC9Cf5DCe3d74e6AF8f94f99fEa81a30A';
 export const erc1155Abi = [
